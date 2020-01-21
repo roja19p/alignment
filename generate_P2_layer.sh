@@ -1,6 +1,6 @@
-MYPATH=`pwd`
-#To generate P1 layer
-
+MYPATH=$HOME_alignment
+#To generate P2 layer
+echo "Generating P2 layer ..."
 #map manual_word.dat
 python3 $MYPATH/map_par_id_to_wrdid.py manual_word.dat  manual_id_mapped.dat manual_id_wrdid.dat
 
@@ -35,15 +35,13 @@ python3 $MYPATH/get_root_frm_conll.py E_conll_enhanced_without_punc.tsv > eng_co
 
 #Generating P1 layer
 echo "(defglobal ?*path* = $MYPATH)" > alignment_path.clp
-myclips -f $MYPATH/run.bat > new_layer.error
+timeout 100 myclips -f $MYPATH/run.bat > new_layer.error
 
-
-sed -i 's/dummy /g' new_layer_p2.dat
+sed -i 's/dummy //g' new_layer_p2.dat
 #Converting P2 layer fact to csv 
 python3 $MYPATH/convert_new_layer_fact_to_csv.py new_layer_p2.dat P2 > p2_layer.csv
 
 python3 $MYPATH/get_left_over_wrds.py p2_layer.csv  P2 > p2_left_over_wrds.dat
-myclips -f $MYPATH/run_left_over_wrds.bat >> new_layer.error
 
 #Replacing new layer id with id_wrd format
 python3 $MYPATH/replace_id_with_wrd.py   manual_id_mapped.dat p2_layer.csv P2 > p2_layer_with_wrd.csv
@@ -56,7 +54,7 @@ wx_utf8 < H_sentence_with_ids.dat > H_sentence_with_ids_utf8.dat
 python3 $MYPATH/group.py E_grouping.dat English_grouping > E_grouping.tsv
 python3 $MYPATH/group.py H_grouping.dat Hindi_grouping > H_grouping.tsv
 
-sed 's/(/g' p2_left_over_wrds.dat | sed 's/)/g' | sed 's/ /,/g'> p2_left_over_wrds.txt
+sed 's/(//g' p2_left_over_wrds.dat | sed 's/)//g' | sed 's/ /,/g'> p2_left_over_wrds.txt
 sed 's/,/\t/g' p2_layer_with_wrd.csv > p2_layer_with_wrd.tsv
 wx_utf8 < p2_layer_with_wrd.tsv > p2_layer_with_wrd_utf8.tsv
 
