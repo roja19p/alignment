@@ -18,7 +18,7 @@ python3 $MYPATH/map_punctuations_in_conll.py E_conll_parse_enhanced > E_conll_en
 python3 $MYPATH/map_punctuations_in_conll.py hindi_dep_parser_original.dat > hindi_dep_parser_original_without_punc.tsv
 
 #Get parent sanwawi info 
-bash $MYPATH/get_parent_sanwawi.sh Eng Hnd   
+#bash $MYPATH/get_parent_sanwawi.sh Eng Hnd   
 
 #Get kriyA_mUla info from Hindi sentence:
 python3 $MYPATH/check_for_kriyA_mUla.py manual_mapped_id_root_info.dat $MYPATH/dics/kriyA_mUla_default_dic.txt > kriyA_mUla_info.dat
