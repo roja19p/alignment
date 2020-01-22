@@ -1,5 +1,5 @@
 (load "alignment_path.clp")
-(bind ?*path* (str-cat ?*path* "/heuristics.clp"))
+(bind ?*path* (str-cat ?*path* "/clp_files/heuristics.clp"))
 (load ?*path*)
 ;(load-facts "H_wordid-word_mapping.dat")
 (load-facts "manual_id_mapped.dat")
@@ -14,7 +14,7 @@
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
-(bind ?*path* (str-cat ?*path* "/group_kriyA_mUla.clp"))
+(bind ?*path* (str-cat ?*path* "/clp_files/group_kriyA_mUla.clp"))
 (load ?*path*)
 (load-facts "hindi_meanings_with_grp_ids.dat")
 (load-facts "cat_consistency_check.dat")
@@ -35,7 +35,7 @@
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
-(bind ?*path* (str-cat ?*path* "/get_anchor.clp"))
+(bind ?*path* (str-cat ?*path* "/clp_files/get_anchor.clp"))
 (load ?*path*)
 (load-facts "new_p_layer_tmp1.dat")
 (load-facts "anchor.dat")
@@ -49,7 +49,7 @@
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
-(bind ?*path* (str-cat ?*path* "/align_using_dic.clp"))
+(bind ?*path* (str-cat ?*path* "/clp_files/align_using_dic.clp"))
 (load ?*path*)
 (load-facts "anchor1.dat")
 (load-facts "database_mng.dat")
@@ -66,7 +66,7 @@
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
-(bind ?*path* (str-cat ?*path* "/align_using_parser.clp"))
+(bind ?*path* (str-cat ?*path* "/clp_files/align_using_parser.clp"))
 (load ?*path*)
 (load-facts "anchor2.dat")
 (load-facts "E_grouping1.dat")
@@ -81,7 +81,7 @@
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
-(bind ?*path* (str-cat ?*path* "/generate_new_layer.clp"))
+(bind ?*path* (str-cat ?*path* "/clp_files/generate_new_layer.clp"))
 (load ?*path*)
 (load-facts "anchor3.dat")
 (assert (label P2))
