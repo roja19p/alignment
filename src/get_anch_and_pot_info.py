@@ -56,7 +56,8 @@ for line in open(sys.argv[1]):
                     e_lst[int(col)-1] =  e_lst[int(col)-1] + '/' + wrdid
     if 'no_match_found' in line.strip():
         lst = line.strip().split()
-        print('(no_match_found', lst[1], ')')
+        val = lst[1].split('+')
+        print('(no_match_found', val[0], lst[1], ')')
 
 #print(e_lst)
 g_lst = define_array(g_lst, hwrd_len+1)

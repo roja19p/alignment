@@ -87,8 +87,8 @@
 	(assert (Hnd_parent-sanwawi ?hid $?hids))
 )
 
-
-(defrule correct_potential_in_if_clause
+;[If an element of interference or uncertainty occurs] then the environment is stochastic.
+(defrule align_if_clause
 (if_clause_head_id-gids ?if_head  $?gids)
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid $?ids)
 (test (or (member$ ?eid $?gids) (eq ?if_head ?eid)))
@@ -110,6 +110,30 @@
 		)
 	)
 )
+
+;lakRya rAjyoM aksara eka lakRya parIkRaNa xvArA nirxiRta kara rahe hEM [jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie].
+(defrule  align_jo_clause
+(Eng_parent-sanwawi ?e_p ?which $?eids)
+(id-word ?which which)
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid $?hids)
+(test (member$ ?eid $?eids))
+(Hnd_parent-sanwawi ?par ?jo $?ids)
+=>
+	(loop-for-count (?i 1 (length $?hids))
+                (bind ?n (nth$ ?i $?hids))
+                (bind ?jo_clause_ids (create$ ?jo $?ids))
+		(if (eq (member$ ?n ?jo_clause_ids) FALSE) then
+			(if (> (length $?ids) 1) then
+                                (bind ?new_ids (delete-member$ $?hids ?n))
+                                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?eid ?new_ids))
+                                (retract ?f)
+                        )
+                )
+        )
+)
+
+
+
 
 ;These rules are not in use..if neccessary modify accordingly
 ;(defrule pick_p_layer_if_clause

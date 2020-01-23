@@ -26,6 +26,7 @@
 ;Rational Action is the action that [maximizes] the expected value of the performance measure given the percept sequence to date.
 ; yukwisafgawa kriyA , vaha kriyA howI hE , jo wiWi karane ke lie boXa anukrama meM xie gae niRpAxana mApa ke apekRiwa mUlya ko [aXikawama karawI hE] . 
 (defrule decide_anchor_for_no_match
+(no_match_found ?hid ?)
 (manual_mapped_id-root ?hid ?hwrd)
 (or (id-root ?id ?rt) (id-conll_root ?id ?rt))
 (test (neq (gdbm_lookup "default-iit-bombay-shabdanjali-dic_smt.gdbm" ?rt) FALSE))
