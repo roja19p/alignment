@@ -47,7 +47,7 @@
 (watch facts)
 (agenda)
 (run)
-(save-facts "anchor1.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id)
+(save-facts "anchor1.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id no_match_found)
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
@@ -65,7 +65,7 @@
 (watch facts)
 (agenda)
 (run)
-(save-facts "anchor2.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id)
+(save-facts "anchor2.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id no_match_found)
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
@@ -82,7 +82,7 @@
 (watch facts)
 (agenda)
 (run)
-(save-facts "anchor3.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id)
+(save-facts "anchor3.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id no_match_found)
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
@@ -101,7 +101,7 @@
 (watch facts)
 (agenda)
 (run)
-(save-facts "anchor4.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id)
+(save-facts "anchor4.dat" local iter-type-eng_g_id-h_g_id hindi_head_id-grp_ids iter-h_g_id no_match_found)
 (clear)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "alignment_path.clp")
