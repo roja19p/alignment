@@ -28,10 +28,21 @@
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?h $?hids)
 (anchor_decided ?hid)
 (test (member$ ?hid $?hids))
+(not (iter-type-eng_g_id-h_g_id ?iter1 anchor ?h $?))
 =>
 	(retract ?f)
 	(bind ?new_ids (delete-member$ $?hids ?hid))
 	(assert (iter-type-eng_g_id-h_g_id  (+ ?iter 1) potential ?h ?new_ids))
+)
+
+(defrule del_if_anch_decided1
+(declare (salience 10))
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?h $?hids)
+(anchor_decided ?hid)
+(test (member$ ?hid $?hids))
+(iter-type-eng_g_id-h_g_id ?iter1 anchor ?h $?)
+=>
+        (retract ?f)
 )
 
 
@@ -43,11 +54,19 @@
 (Eng_label-group_elements ?lab $?eids)
 (test (and (member$ ?id $?eids) (member$ ?c $?eids)))
 (Hnd_label-group_elements ? $?h_ids)
+(hindi_head_id-grp_ids ?h $?h_gids)
 (test (member$ $?hids $?h_ids))
+(test (member$ ?h $?h_ids))
+(not (eng_anchor_decided ?c))
+(not (anchor_decided $?hids))
 =>
-	(bind ?new_id (delete-member$ $?h_ids $?hids))
+	(printout t $?h_ids crlf)
+	(printout t $?h_gids crlf)
+
+	(bind ?new_id (delete-member$ $?h_ids $?h_gids))
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?c ?new_id))
 	(assert (anchor_decided ?new_id))
+	(assert (eng_anchor_decided ?c))
 )
 
 ;;ai2E, 2.38 [Rational Action] is the action that maximizes the expected value of the performance measure given the percept sequence to date.

@@ -37,18 +37,16 @@
 ?f1<-(iter-type-eng_g_id-h_g_id ?iter1 potential ?id ?hid)
 =>
         (bind ?type "")
-        (printout t ?type crlf)
+;        (printout t ?type crlf)
+	(bind ?count 0)
         (loop-for-count (?i (length $?hids))
                 (bind ?val (nth$ ?i $?hids))
-                (if (and (neq ?i ?id) (neq ?val ?hid)) then
-                        (bind ?type "anchor")
-                else (if (neq ?i ?id) then
-
-                        (bind ?type "potential")
-                        (break)
-                )
+                (if (eq ?val ?hid) then
+			(bind ?count (+ ?count 1))
                 )
         )
+	(if (eq ?count 1) then (bind ?type "anchor")
+	else	(bind ?type "potential"))
         (if (eq ?type "anchor") then
                 (retract ?f1)
                 (assert (iter-type-eng_g_id-h_g_id (+ ?iter1 1) anchor ?id ?hid))
