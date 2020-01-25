@@ -96,4 +96,10 @@
         (retract ?f)
 	(bind ?new_id (delete-member$ $?h_id1 ?sug_id))
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_id))
+        (if (>= (length ?new_ids) 1) then
+                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_id))
+        else
+                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 0))
+        )
+
 )
