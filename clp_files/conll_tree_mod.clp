@@ -3,16 +3,30 @@
 
 ;One [boy] [and] two girls are coming.
 (defrule modify_and_head_child_in_noun_case
-?f<-(id-word-cat-head_id-rel ?id and ?cat ?hid cc )
+?f<-(id-word-cat-head_id-rel ?id ?conj&and|Ora ?cat ?hid cc )
 ?f1<-(id-word-cat-head_id-rel ?hid ?wrd NOUN ?id1 ?rel )
-(not (modified_and_fact ?id))
+(not (modified_and_fact ?conj ?id))
 =>
 	(retract ?f ?f1)
-	(assert (id-word-cat-head_id-rel ?id and ?cat ?id1 cc))
+	(assert (id-word-cat-head_id-rel ?id ?conj ?cat ?id1 cc))
 	(assert (id-word-cat-head_id-rel ?hid ?wrd NOUN ?id ?rel))
-	(assert (modified_and_fact ?id))
+	(assert (modified_and_fact ?conj ?id))
 	(assert (id-transformed_id ?hid ?id))
 )
+
+
+(defrule modify_Ora
+?f<-(id-word-cat-head_id-rel ?id ?conj&Ora ?cat ?hid cc )
+?f1<-(id-word-cat-head_id-rel ?hid ?wrd NOUN ?id1 ?rel )
+(modified_and_fact ?conj ?id)
+=>
+	(retract ?f ?f1)
+        (assert (id-word-cat-head_id-rel ?id ?conj ?cat ?id1 cc))
+        (assert (id-word-cat-head_id-rel ?hid ?wrd NOUN ?id ?rel))
+;        (assert (modified_and_fact ?conj ?id))
+        (assert (id-transformed_id ?hid ?id))
+)
+
 
 ;One boy [and] [two] girls are coming.
 (defrule modify_all_and_components
