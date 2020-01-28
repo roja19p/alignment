@@ -38,9 +38,9 @@ for line in open(sys.argv[2]):
             line = lst[0] + ' ' + lst[1]
         if 'manual_sen_length' in line:
             line = replace_pid_with_id(line.strip(), lst[2])
-        if '_info' in line.strip() and 'partial_match' not in hids[2]: #As of now not using partial_match results . Prob in ai1E, 2.113
-            print(line)
-        elif '_info' not in line:
-            print(line)
+#        if '_info' in line.strip() and 'partial_match' not in hids[2]: #As of now not using partial_match results . Prob in ai1E, 2.113
+#            print(line)
+#        elif '_info' not in line:
+        print(line)
 
 

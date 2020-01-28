@@ -47,11 +47,13 @@ for line in open(sys.argv[1]):
         hid = lst[0][:-5]
         wrdid = lst[1].split(',')[0]
         col = lst[1].split(',')[1]
+        src = lst[1].split(',')[2]
         val = col + '_' + wrdid
-        if val not in e_lst:
-            if e_lst[int(col)-1] == '':
+        if src != 'partial_match':
+            if val not in e_lst:
+              if e_lst[int(col)-1] == '':
                 e_lst[int(col)-1] =  wrdid
-            else:
+              else:
                 if wrdid not in e_lst[int(col)-1].split('/'):
                     e_lst[int(col)-1] =  e_lst[int(col)-1] + '/' + wrdid
     if 'no_match_found' in line.strip():
@@ -61,6 +63,7 @@ for line in open(sys.argv[1]):
 
 #print(e_lst)
 g_lst = define_array(g_lst, hwrd_len+1)
+p_lst = define_array(g_lst, hwrd_len+1)
 
 for line in open(sys.argv[1]):
     if '_info' in line.strip():
@@ -68,7 +71,11 @@ for line in open(sys.argv[1]):
         hid = lst[0][:-5]
         wrdid = lst[1].split(',')[0]
         col = lst[1].split(',')[1]
-        g_lst[int(hid)-1] = wrdid
+        src = lst[1].split(',')[2]
+        if src != 'partial_match':
+            g_lst[int(hid)-1] = wrdid
+        else:
+            p_lst[int(hid)-1] = wrdid #Disabling partial match data in anchor and potential slot ...only storing head and grp ids
     if 'no_match_found' in line.strip():
         lst = line.strip().split()
         if '+' not in lst[1]:
@@ -80,12 +87,18 @@ for line in open(sys.argv[1]):
 
 
 
+
 #To print hindi group head and ids
 for i in range(0, len(g_lst)):
     lst = g_lst[i].split('+')
+    plst = p_lst[i].split('+')
     if lst != ['']:
         print('(hindi_head_id-grp_ids', i+1 , ' '.join(lst), ')')
+    if plst != ['']:    
+        print('(hindi_head_id-grp_ids', i+1 , ' '.join(plst), ')') #Disabling partial match data in anchor and potential slot ...only storing head and grp ids
 
+#print(g_lst)
+#print(p_lst)
 new_lst  = e_lst
 
 
