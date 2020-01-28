@@ -118,18 +118,14 @@
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid $?hids)
 (test (member$ ?eid $?eids))
 (Hnd_parent-sanwawi ?par ?jo $?ids)
+(manual_mapped_id-word ?id1 ?hwrd)
+(test (member$ ?id1 $?hids))
+(test (member$ ?id1 $?ids)) 
+(not (anchor_decided ?eid))
 =>
-	(loop-for-count (?i 1 (length $?hids))
-                (bind ?n (nth$ ?i $?hids))
-                (bind ?jo_clause_ids (create$ ?jo $?ids))
-		(if (eq (member$ ?n ?jo_clause_ids) FALSE) then
-			(if (> (length $?ids) 1) then
-                                (bind ?new_ids (delete-member$ $?hids ?n))
-                                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?eid ?new_ids))
-                                (retract ?f)
-                        )
-                )
-        )
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?eid ?id1))
+	(assert (anchor_decided ?eid))
+        (retract ?f)
 )
 
 

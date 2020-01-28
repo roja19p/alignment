@@ -62,6 +62,8 @@
 (load-facts "revised_root.dat")
 (load-facts "eng_conll_root.dat")
 (load-facts "manual_mapped_id_root_info.dat")
+(load-facts "E_grouping1.dat")
+(load-facts "H_grouping1.dat")
 (assert (no_match_found))
 (watch rules)
 (watch facts)

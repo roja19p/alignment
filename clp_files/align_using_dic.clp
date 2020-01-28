@@ -11,6 +11,34 @@
                 (bind ?new_str (explode$ (str-cat ?new_str (sub-string 1 (length ?str) ?str))))
  )
 
+;ai1E, 2.113
+;While [some translation systems] have been developed, there is a lot of scope for improvement in translation quality.
+;Here 'some' we have an anchor fact. So using this fact to decide translation mng using E grouping and H grouping
+(defrule decide_anchor_using_technical_dic
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids)
+(manual_mapped_id-word  ?hid ?hwrd)
+(test (member$ ?hid $?hids))
+(Eng_label-group_elements ? $?egids)
+(test (member$ ?id $?egids))
+(Hnd_label-group_elements ? $?hgids)
+(test (member$ ?hid $?hgids))
+(iter-type-eng_g_id-h_g_id ?iter1 anchor ?id1 ?hid1)
+(test (member$ ?id1 $?egids))
+(test (member$ ?hid1 $?hgids))
+(or (id-root ?id ?rt) (id-conll_root ?id ?rt))
+(test (neq (gdbm_lookup "computer_science.gdbm" (str-cat ?rt "_noun")) FALSE))
+(not (anchor_decided ?hid))
+=>
+	(bind ?mng (gdbm_lookup "computer_science.gdbm" (str-cat ?rt "_noun")))
+        (bind $?mngs  (explode$ (implode$ (remove_character "/"  ?mng " "))))
+        (if (member$ ?hwrd $?mngs) then
+		(retract ?f)
+		(assert (iter-type-eng_g_id-h_g_id ?iter anchor ?id ?hid))
+	)
+)
+
+
+;Decide using default dic:
 (defrule decide_anchor_using_dic
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id ?hid)
 (manual_mapped_id-word	?hid ?hwrd)

@@ -28,14 +28,19 @@ for line in open(sys.argv[2]):
         lst = line.strip().split()
         hids = lst[1].split(',')
         if '_info' in lst[0]:
-            ids = lst[0].split('_')
-            lst[0] = replace_pid_with_id(lst[0], ids[0])
-            hids[0] = check_for_mul_ids(hids[0])
-            lst[1] = hids[0]+','+','.join(hids[1:])
-            line = lst[0] + ' ' + lst[1]
+                ids = lst[0].split('_')
+                lst[0] = replace_pid_with_id(lst[0], ids[0])
+                hids[0] = check_for_mul_ids(hids[0])
+                lst[1] = hids[0]+','+','.join(hids[1:])
+                line = lst[0] + ' ' + lst[1]
         if 'no_match_found' in lst[0]:
             lst[1] = check_for_mul_ids(lst[1])
             line = lst[0] + ' ' + lst[1]
         if 'manual_sen_length' in line:
             line = replace_pid_with_id(line.strip(), lst[2])
-        print(line)
+        if '_info' in line.strip() and 'partial_match' not in hids[2]: #As of now not using partial_match results . Prob in ai1E, 2.113
+            print(line)
+        elif '_info' not in line:
+            print(line)
+
+

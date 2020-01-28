@@ -59,47 +59,47 @@
 )
 
 
-(defrule decide_anchor_using_grouping
-(declare (salience 7))
-(Eng_label-group_elements ?lab $?eids)
-(iter-type-eng_g_id-h_g_id ?iter anchor  ?id  $?ids)
-(test (member$ ?id $?eids))
-(iter-type-eng_g_id-h_g_id ?iter1 potential  ?id1  $?h_id1)
-(test (member$ ?id1 $?eids))
-(Hnd_label-group_elements ?hlab $?hids)
-(test (member$ $?ids $?hids))
-=>
-	(loop-for-count (?i (length $?h_id1))
-		(bind ?tmp (nth$ ?i $?h_id1))
-		(if (neq (member$ ?tmp $?hids)  FALSE) then 
-			(assert (eng_id-possible_suggestion ?id1 ?tmp))
-		)
-	)
-)
+;(defrule decide_anchor_using_grouping
+;(declare (salience 7))
+;(Eng_label-group_elements ?lab $?eids)
+;(iter-type-eng_g_id-h_g_id ?iter anchor  ?id  $?ids)
+;(test (member$ ?id $?eids))
+;(iter-type-eng_g_id-h_g_id ?iter1 potential  ?id1  $?h_id1)
+;(test (member$ ?id1 $?eids))
+;(Hnd_label-group_elements ?hlab $?hids)
+;(test (member$ $?ids $?hids))
+;=>
+;	(loop-for-count (?i (length $?h_id1))
+;		(bind ?tmp (nth$ ?i $?h_id1))
+;		(if (neq (member$ ?tmp $?hids)  FALSE) then 
+;			(assert (eng_id-possible_suggestion ?id1 ?tmp))
+;		)
+;	)
+;)
+;
+;;
+;(defrule remove_potential_if_sugg_avl1
+;(eng_id-possible_suggestion ?id ?sug_id)
+;?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id  $?h_id1)
+;=>
+;	(retract ?f)
+;	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?id ?sug_id))
+;)
+;
 
-
-(defrule remove_potential_if_sugg_avl1
-(eng_id-possible_suggestion ?id ?sug_id)
-?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id  $?h_id1)
-=>
-	(retract ?f)
-	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?id ?sug_id))
-)
-
-
-(defrule remove_potential_if_sugg_avl2
-(eng_id-possible_suggestion ?id ?sug_id)
-(iter-type-eng_g_id-h_g_id ?iter1 anchor ?id ?sug_id)
-?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id1  $?h_id1)
-(test (member$ ?sug_id $?h_id1))
-=>
-        (retract ?f)
-	(bind ?new_id (delete-member$ $?h_id1 ?sug_id))
-	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_id))
-        (if (>= (length ?new_ids) 1) then
-                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_id))
-        else
-                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 0))
-        )
-
-)
+;(defrule remove_potential_if_sugg_avl2
+;(eng_id-possible_suggestion ?id ?sug_id)
+;(iter-type-eng_g_id-h_g_id ?iter1 anchor ?id ?sug_id)
+;?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id1  $?h_id1)
+;(test (member$ ?sug_id $?h_id1))
+;=>
+;        (retract ?f)
+;	(bind ?new_id (delete-member$ $?h_id1 ?sug_id))
+;	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_id))
+;        (if (>= (length ?new_id) 1) then
+;                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_id))
+;        else
+;                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 0))
+;        )
+;
+;)

@@ -1,3 +1,18 @@
+(deffunction remove_character(?char ?str ?replace_char)
+                        (bind ?new_str "")
+                        (bind ?index (str-index ?char ?str))
+                        (if (neq ?index FALSE) then
+                        (while (neq ?index FALSE)
+                        (bind ?new_str (str-cat ?new_str (sub-string 1 (- ?index 1) ?str) ?replace_char))
+                        (bind ?str (sub-string (+ ?index 1) (length ?str) ?str))
+                        (bind ?index (str-index ?char ?str))
+                        )
+                        )
+                (bind ?new_str (explode$ (str-cat ?new_str (sub-string 1 (length ?str) ?str))))
+ )
+
+
+
 (defrule remove_pot_id_if_anc_decided
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids)
 (iter-type-eng_g_id-h_g_id ?iter1 anchor ? ?hid)
@@ -14,14 +29,19 @@
 )
 
 (defrule create_fact
-(declare (salience -100))
+(declare (salience -300))
 ?f<-(iter-h_g_id  ?iter  $?hids)
-(iter-type-eng_g_id-h_g_id ?iter1 ? ?id ?hid)
+(iter-type-eng_g_id-h_g_id ?iter1 ? ?id $?hid)
 (test (neq (nth$ ?id $?hids) ?hid))
 (not (anchor_replaced ?id))
 =>
         (retract ?f)
-        (bind $?hids (replace$ $?hids ?id ?id ?hid))
+	(if (eq (length $?hid) 1) then 
+	        (bind $?hids (replace$ $?hids ?id ?id ?hid))
+	else
+		(bind ?m (explode$ (implode$ (remove_character " " (implode$ $?hid) ","))))
+	        (bind $?hids (replace$ $?hids ?id ?id ?m))
+	)
         (if (>= ?iter1 ?iter) then
                 (assert (iter-h_g_id  ?iter1  $?hids))
         else
