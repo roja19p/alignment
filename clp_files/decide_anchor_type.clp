@@ -33,7 +33,7 @@
 ?f<-(iter-h_g_id  ?iter  $?hids)
 (iter-type-eng_g_id-h_g_id ?iter1 ? ?id $?hid)
 (test (neq (nth$ ?id $?hids) ?hid))
-(not (anchor_replaced ?id))
+(not (anchor_replaced ?id $?hid))
 =>
         (retract ?f)
 	(if (eq (length $?hid) 1) then 
@@ -47,7 +47,7 @@
         else
                 (assert (iter-h_g_id  ?iter  $?hids))
         )
-        (assert (anchor_replaced ?id))
+        (assert (anchor_replaced ?id $?hid))
 )
 
 

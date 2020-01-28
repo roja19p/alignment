@@ -114,7 +114,7 @@
 ;lakRya rAjyoM aksara eka lakRya parIkRaNa xvArA nirxiRta kara rahe hEM [jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie].
 (defrule  align_jo_clause
 (Eng_parent-sanwawi ?e_p ?which $?eids)
-(id-word ?which which)
+(id-word ?which which|that)
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid $?hids)
 (test (member$ ?eid $?eids))
 (Hnd_parent-sanwawi ?par ?jo $?ids)
@@ -128,7 +128,28 @@
         (retract ?f)
 )
 
+;Goal states are often specified by a [goal test] which any goal state must satisfy.
+;lakRya rAjyoM aksara eka [lakRya parIkRaNa] xvArA nirxiRta kara rahe hEM jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie. 
+(defrule comp_rule_in_hin1
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?e2 $?hids)
+(eng_relation_name-head-chiid compound ?e1 ?e2 )
+(iter-type-eng_g_id-h_g_id ?iter1 anchor ?e1 $?ids)
+(hnd_relation_name-head-chiid compound ?h1 ?h2)
+(test (member$ ?h1 $?ids))
+(test (member$ ?h2 $?hids))
+(not (anchor_decided ?e2))
+=>
+	(retract ?f)
+        (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?e2 ?h2))
+	(assert (anchor_decided ?e2))
+)
 
+
+;(defrule align_unlabel
+;?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?e2 $?hids)
+;(eng_relation_name-head-chiid ?rel ?e1 ?e2)
+;
+;(hnd_relation_name-head-chiid compound ?h1 ?h2)
 
 
 ;These rules are not in use..if neccessary modify accordingly
