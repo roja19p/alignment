@@ -4,7 +4,10 @@
 (defrule del_potential_anchor_if_P1_is_fixed
 (declare (salience 10))
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?)
+(hindi_head_id-grp_ids ?h $?hids)
 (P1_tmp ?id  $?pids)
+(test (eq $?pids $?hids))
+(not (iter-type-eng_g_id-h_g_id ?iter1 potential ? ?h))
 =>
 	(retract ?f)
 )
@@ -19,6 +22,7 @@
 (hindi_head_id-grp_ids ?hid $?h_ids )
 (test (member$ ?hid $?ids))
 (test (member$ $?h_ids $?pids))
+(test (neq $?h_ids $?pids))
 =>
 	(retract ?f)
 	(bind ?new_ids (delete-member$ $?ids ?hid))
@@ -52,7 +56,7 @@
 (P1_tmp ?id  $?pids)
 (hindi_head_id-grp_ids ?hid $?gids)
 (test (member$ ?hid  $?pids))
-(not (iter-type-eng_g_id-h_g_id ?iter ?type ?id $?ids))
+(not (iter-type-eng_g_id-h_g_id ?iter ?type ? $? ?hid $?))
 =>
 	(assert (iter-type-eng_g_id-h_g_id 2 anchor ?id ?hid))
 ;	(assert (iter-type-eng_g_id-h_g_id ?iter anchor ?id $?pids))

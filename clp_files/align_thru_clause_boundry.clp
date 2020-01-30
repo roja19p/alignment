@@ -111,6 +111,32 @@
 	)
 )
 
+
+(defrule get_main_clause_frm_rel_clause
+?f<-(Eng_parent-sanwawi ?e_p $?eids)
+(Eng_parent-sanwawi ?e_p1 $?eids1)
+(test (neq ?e_p ?e_p1))
+(id-word ?id ?wrd&which|that)
+(test (eq (nth$ 1 $?eids1) ?id))
+(test (member$ ?id  $?eids))
+;(test (subsetp (create$ ?e_p1 $?eids) $?eids1))
+(not (clause_decided ?e_p))
+=>
+	(retract ?f)
+	(bind $?n (sort > (create$ ?e_p1 $?eids1)))
+	(printout t (type $?eids) crlf)
+	(printout t (type $?n) crlf)
+	(bind ?new_ids (delete-member$ $?eids $?n))
+	(printout t ?new_ids crlf)
+	(assert (Eng_parent-sanwawi ?e_p ?new_ids))
+	(assert (clause_decided ?e_p))
+)	
+
+
+
+
+
+
 ;lakRya rAjyoM aksara eka lakRya parIkRaNa xvArA nirxiRta kara rahe hEM [jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie].
 (defrule  align_jo_clause
 (Eng_parent-sanwawi ?e_p ?which $?eids)
@@ -144,12 +170,51 @@
 	(assert (anchor_decided ?e2))
 )
 
+;[Rational Action] is the action that maximizes the expected value of the performance measure given the percept sequence to date.
+;[yukwisafgawa kriyA], vaha kriyA howI hE, jo wiWi karane ke lie boXa anukrama meM xie gae niRpAxana mApa ke apekRiwa mUlya ko aXikawama karawI hE.
+(defrule align_thru_unlabeled_info
+(eng_relation_name-head-chiid ?rel ?e1 ?e2)
+(iter-type-eng_g_id-h_g_id ?iter  anchor ?e1 $?hids)
+(hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
+(test (member$ ?h1 $?hids))
+(hindi_head_id-grp_ids ?h2 $?h2_ids)
+(not (iter-type-eng_g_id-h_g_id ?  ? ?e2 $?))
+(not (iter-type-eng_g_id-h_g_id ?  ? ? $? ?h2 $?)) ;added this condition to stop firing in Ex: One of [the] rooms contains a computer.
+(test (neq ?rel case))
+(test (neq ?rel1 case))
+=>
+	(assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h2))
+)
 
-;(defrule align_unlabel
-;?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?e2 $?hids)
-;(eng_relation_name-head-chiid ?rel ?e1 ?e2)
-;
-;(hnd_relation_name-head-chiid compound ?h1 ?h2)
+
+;One of the rooms contains [a] computer.
+(defrule align_thru_unlabelled_info_whn_fact_avl
+(eng_relation_name-head-chiid ?rel ?e1 ?e2)
+(iter-type-eng_g_id-h_g_id ?iter  anchor ?e1 $?hids1)
+?f1<-(iter-type-eng_g_id-h_g_id ?iter1  potential ?e2 $?hids2)
+(hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
+(test (member$ ?h1 $?hids1))
+(test (member$ ?h2 $?hids2))
+=>
+	(retract ?f1)
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter1 1) anchor ?e2 ?h2))
+)
+
+
+;Goal states are often [specified] by a goal test which any goal state must satisfy.
+;lakRya rAjyoM aksara eka lakRya parIkRaNa xvArA [nirxiRta kara rahe hEM] jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie.
+(defrule align_thru_unlabeled_info_for_root
+(eng_relation_name-head-chiid root ?e1 ?e2)
+(hnd_relation_name-head-chiid root ?h1 ?h2)
+(not (iter-type-eng_g_id-h_g_id ?  ? ?e2 $?))
+(not (eng_relation_name-head-chiid cop ?e2 ?)) ;If an element of interference or uncertainty occurs then the environment [is stochastic].
+(hindi_head_id-grp_ids ?h $?hids)
+(test (member$ ?h2 $?hids))
+=>
+        (assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h))
+)
+
+
 
 
 ;These rules are not in use..if neccessary modify accordingly
