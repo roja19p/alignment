@@ -133,10 +133,6 @@
 )	
 
 
-
-
-
-
 ;lakRya rAjyoM aksara eka lakRya parIkRaNa xvArA nirxiRta kara rahe hEM [jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie].
 (defrule  align_jo_clause
 (Eng_parent-sanwawi ?e_p ?which $?eids)
@@ -152,6 +148,19 @@
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?eid ?id1))
 	(assert (anchor_decided ?eid))
         (retract ?f)
+)
+
+;He even propounded the possibility of letting the machine alter its own instructions so [that] machines can learn from experience.
+;unhoMne [isa] bAwa kI samBAvanA BI prawipAxiwa kI ki maSIna ko apane nirxeSoM meM parivarwana karane xiyA jAe wAki maSInoM ko anuBava se sIKA jA sake
+(defrule cross_check_jo_clause
+(Eng_parent-sanwawi ?e_p ?which $?eids)
+(id-word ?which which|that)
+?f<-(iter-type-eng_g_id-h_g_id ?iter anchor ?which ?hid)
+(Hnd_parent-sanwawi ?par ?jo $?ids)
+(manual_mapped_id-word ?jo ?hwrd&wAki|jo)
+(test (eq (member$ ?hid $?ids) FALSE))
+=>
+	(retract ?f)
 )
 
 ;Goal states are often specified by a [goal test] which any goal state must satisfy.
@@ -180,8 +189,9 @@
 (hindi_head_id-grp_ids ?h2 $?h2_ids)
 (not (iter-type-eng_g_id-h_g_id ?  ? ?e2 $?))
 (not (iter-type-eng_g_id-h_g_id ?  ? ? $? ?h2 $?)) ;added this condition to stop firing in Ex: One of [the] rooms contains a computer.
-(test (neq ?rel case))
+(test (and (neq ?rel case) (neq ?rel aux))) ;Ex: He [can] ask questions through a teletype and receives answers from both A and B.
 (test (neq ?rel1 case))
+(not (hnd_relation_name-head-chiid case ?h2 ?)) ;Ex: He can ask questions [through] a teletype and receives answers from both A and B.
 =>
 	(assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h2))
 )
@@ -213,6 +223,44 @@
 =>
         (assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h))
 )
+
+;The advent of electronic computers provided a revolutionary advance in the ability to study intelligence.
+;ilektraoYnika kampyUtaroM ke Agamana se buxXi kA [aXyayana karane kI] kRamawA meM krAnwikArI pragawi huI.
+(defrule align_kI
+(Hnd_label-group_elements ?lab $?gids)
+(manual_mapped_id-word ?id kI)
+?f<-(hindi_head_id-grp_ids ?h $?ids)
+(test (member$ ?id $?gids))
+(test (member$ (- ?id 1) $?ids))
+(test (eq (member$ ?id $?ids) FALSE))
+=>
+	(retract ?f)
+	(assert (hindi_head_id-grp_ids ?h $?ids ?id))
+	(printout t "Warning:: Aligned kI ... " ?id crlf)
+)
+	
+ 
+(defrule align_transliterate_wrd
+(eng_wrd-transliterate_wrd ?wrd ?hwrd)
+(id-word ?id ?wrd)
+(manual_mapped_id-word ?hid ?hwrd)
+(not (iter-type-eng_g_id-h_g_id ?  ? ?id $?))
+=>
+	(assert (iter-type-eng_g_id-h_g_id  1 anchor ?id ?hid))
+)
+
+
+(defrule align_transliterate_wrd_in_pot
+(eng_wrd-transliterate_wrd ?wrd ?hwrd)
+(id-word ?id ?wrd)
+(manual_mapped_id-word ?hid ?hwrd)
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id $?)
+=>
+	(retract ?f)
+        (assert (iter-type-eng_g_id-h_g_id  (+ ?iter 1) anchor ?id ?hid))
+)
+
+
 
 
 
