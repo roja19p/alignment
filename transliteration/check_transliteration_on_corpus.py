@@ -46,7 +46,7 @@ for i in range(0, len(fer)):
     h_lst = fhr[i].split()
     for e_wrd in e_lst:
         for h_wrd in h_lst:
-            cmd = 'python2.7  check_transliteration.py ' + e_wrd + ' ' + h_wrd + ' Sound-dic.txt'
+            cmd = 'python check_transliteration.py ' + e_wrd + ' ' + h_wrd + ' Sound-dic.txt'
 #            print(cmd)
             out = subprocess.getoutput(cmd)
 #            print(out)
