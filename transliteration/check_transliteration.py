@@ -182,7 +182,6 @@ while eng_index < len(eng):
     out = store_info_in_stacks(dic_stack, eng_index, hnd_index, cur_e, cur_h)
     print_debug('Complete stack', out, stack, working_stack)
     dic_stack = []
-
     if len(out) > 1:
         stack = out[0]
         working_stack = out[1]
@@ -211,6 +210,21 @@ while eng_index < len(eng):
     final_e_str = eng[:eng_index]
     final_h_str = hnd[:hnd_index]
     print_debug('Final string is::', final_e_str, final_h_str)
+    ##Added below loop if original english string == final_e_str and hindi string != final_h_str and stack != [] case. Ex: AI eAI
+    if final_e_str == eng and final_h_str != hnd and stack !=[] :
+        a = stack.pop()
+        working_stack.append(a)
+        print_debug('Working_stack is::',
+                        working_stack, type(working_stack))
+        l = a.split(",")  # To get current eng index and hindi index
+        o = work_on_pop(working_stack, int(
+                l[4]), int(l[5]))  # Ex: trehan  wrehana
+        eng_index = o[0] 
+        hnd_index = o[1] 
+        print_debug('Current index is::', eng_index, hnd_index)
+        final_e_str = eng[:eng_index]
+        final_h_str = hnd[:hnd_index]
+        print_debug('Final string is::', final_e_str, final_h_str)
 
 ################################
 # Check transliteration::

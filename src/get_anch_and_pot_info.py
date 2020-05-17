@@ -49,7 +49,7 @@ for line in open(sys.argv[1]):
         col = lst[1].split(',')[1]
         src = lst[1].split(',')[2]
         val = col + '_' + wrdid
-        if src != 'partial_match':
+        if src != 'partial_match' and src != 'hindi_wordnet_match_using_dic':
             if val not in e_lst:
               if e_lst[int(col)-1] == '':
                 e_lst[int(col)-1] =  wrdid
@@ -72,7 +72,7 @@ for line in open(sys.argv[1]):
         wrdid = lst[1].split(',')[0]
         col = lst[1].split(',')[1]
         src = lst[1].split(',')[2]
-        if src != 'partial_match':
+        if src != 'partial_match' and src != 'hindi_wordnet_match_using_dic':
             g_lst[int(hid)-1] = wrdid
         else:
             p_lst[int(hid)-1] = wrdid #Disabling partial match data in anchor and potential slot ...only storing head and grp ids

@@ -17,6 +17,7 @@
 ;ai2E, 2.10, An autonomous agent decides autonomously which action to take [in] the current situation to maximize progress towards its goals.
 (defrule check_prep
 (id-cat_coarse ?id preposition)
+(not (eng_id_decided ?id)); with = se_yukwa
 =>
 	(assert (P1_tmp ?id 0))
 	(assert (eng_id_decided ?id))
@@ -46,6 +47,51 @@
 			(assert (hid_id_decided (+ ?hid 2)))
 		)
 	)
+)
+
+
+;Rule for 'best' (Special case)
+;The second approach is [best] embodied by the concept of the Turing Test.
+;xUsarA xqRtikoNa tyUriMga testa kI safkalpanA xvArA [sarvowwama rUpa se] vyakwa kiyA gayA hE  .
+(defrule best_rule
+(id-word ?id best)
+(manual_mapped_id-word  ?hid ?hwrd)
+(manual_mapped_id-word  =(+ ?hid 1) rUpa)
+(manual_mapped_id-word  =(+ ?hid 2) se)
+(not (hid_id_decided ?hid))
+(test (neq (gdbm_lookup "default-iit-bombay-shabdanjali-dic.gdbm" (str-cat "best_adverb")) FALSE))
+=>
+	(bind ?mng (gdbm_lookup "default-iit-bombay-shabdanjali-dic.gdbm" (str-cat "best_adjective")))
+	(if (neq ?mng FALSE) then
+                (bind $?mngs  (explode$ (implode$ (remove_character "/"  ?mng " "))))
+                (if (member$ ?hwrd $?mngs) then
+                        (assert (P1_tmp ?id ?hid (+ ?hid 1) (+ ?hid 2)))
+                        (assert (eng_id_decided ?id))
+                        (assert (hid_id_decided ?hid))
+                        (assert (hid_id_decided (+ ?hid 1)))
+                        (assert (hid_id_decided (+ ?hid 2)))
+                )
+        )
+)
+
+
+(defrule se_yukwa_rule
+(id-word ?id ?wrd)
+(manual_mapped_id-word  ?hid se)
+(manual_mapped_id-word  =(+ ?hid 1) yukwa)
+(not (hid_id_decided ?hid))
+(test (neq (gdbm_lookup "default-iit-bombay-shabdanjali-dic_smt.gdbm" ?wrd) FALSE))
+=>
+        (bind ?mng (gdbm_lookup "default-iit-bombay-shabdanjali-dic_smt.gdbm" ?wrd))
+        (bind $?mngs  (explode$ (implode$ (remove_character "/"  ?mng " "))))
+	(bind ?hmng (string-to-field "se_yukwa"))
+        (if (member$ ?hmng $?mngs) then
+               (assert (P1_tmp ?id ?hid (+ ?hid 1)))
+               (assert (eng_id_decided ?id))
+               (assert (hid_id_decided ?hid))
+               (assert (hid_id_decided (+ ?hid 1)))
+                
+        )
 )
 
 ;it rule when 'it' is not dummy. 'it becomes subject

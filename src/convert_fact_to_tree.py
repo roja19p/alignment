@@ -10,7 +10,7 @@ for line in open(sys.argv[1]):
     new_lst.append("_")
     new_lst.append("_")
     new_lst.append(lst[4])
-    new_lst.append("_")
+    new_lst.append(lst[5])
     #new_lst.append(lst[3]+':'+lst[4])
     new_lst.append("_")
     new_lst.append("_")

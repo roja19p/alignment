@@ -15,9 +15,11 @@
 
 (defrule remove_pot_id_if_anc_decided
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids)
-(iter-type-eng_g_id-h_g_id ?iter1 anchor ? ?hid)
+(iter-type-eng_g_id-h_g_id ?iter1 anchor ?id1 ?hid)
+(test (neq ?id ?id1))
 ;(anchor_decided_e_id-h_id ?id1 ?hid)
 (test (member$ ?hid $?hids))
+(test (neq ?hid 0))
 =>
 	(retract ?f)
 	(bind ?new_id (delete-member$ $?hids ?hid))
@@ -57,14 +59,23 @@
 ?f1<-(iter-type-eng_g_id-h_g_id ?iter1 potential ?id ?hid)
 =>
         (bind ?type "")
-;        (printout t ?type crlf)
 	(bind ?count 0)
         (loop-for-count (?i (length $?hids))
                 (bind ?val (nth$ ?i $?hids))
-                (if (eq ?val ?hid) then
-			(bind ?count (+ ?count 1))
-                )
+		(if (eq ?val ?hid) then 
+				(bind ?count (+ ?count 1))
+		else
+		(if (neq (integerp  ?val) TRUE) then 
+		;	(if (neq (str-index "," ?val) FALSE) then 
+         ;       		(printout t (type ?val) " " ?val crlf)
+				(bind $?m  (remove_character "," ?val " "))
+	;			(printout t $?m crlf)
+                		(if (member$ ?hid $?m) then
+					(bind ?count (+ ?count 1))
+                	)		
+		))
         )
+	;(printout t ?count crlf)
 	(if (eq ?count 1) then (bind ?type "anchor")
 	else	(bind ?type "potential"))
         (if (eq ?type "anchor") then

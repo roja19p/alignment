@@ -33,7 +33,11 @@
 =>
 	(retract ?f)
 	(bind ?new_ids (delete-member$ $?hids ?hid))
-	(assert (iter-type-eng_g_id-h_g_id  (+ ?iter 1) potential ?h ?new_ids))
+	(if (>= (length ?new_ids) 1) then 
+                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?h ?new_ids))
+        else
+                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?h  0))
+        )
 )
 
 (defrule del_if_anch_decided1
@@ -90,6 +94,7 @@
 (defrule decide_anchor
 ?f<-(eng_id-possible_suggestion ?id $?ids)
 ?f1<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids)
+(test (neq (length $?ids) 0));Counter ex: ai1E , 2.113
 =>
 	(retract ?f ?f1)	
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?id $?ids))
@@ -101,6 +106,7 @@
 ?f<-(eng_id-possible_suggestion ?id $?ids)
 (not (anchor_decided ?id))
 (not (iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids))
+(test (neq (length $?ids) 0))
 =>
 	(retract ?f)
         (assert (iter-type-eng_g_id-h_g_id  1 anchor ?id $?ids))

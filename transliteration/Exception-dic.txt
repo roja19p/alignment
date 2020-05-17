@@ -5,3 +5,4 @@ Kumaon	kumAzU
 Indo	BArawa
 Hephaestus	hIPestasa
 Aristotle	araswU
+#AI	ei

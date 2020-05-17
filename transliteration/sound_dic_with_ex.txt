@@ -1,0 +1,204 @@
+#Format of sound dictionary with examples
+#English_sound	Hindi_sound-Eng_wrd-Hindi_wrd
+#Note: Marked eng sounds and hindi sounds in [ ]
+#############################################
+a	a-another-anawar
+	e-many-meni
+	E-rapid-rEpid
+	A-are-Ara
+	o-walk-voka
+	yA-leukemi[a]-lyUkImi[yA]
+	_-be[a]n-bIna
+
+ai	e-br[ai]n-br[e]na
+	eya-legionn[ai]re-lejiyon[eya]ra
+	E-N[ai]nital-n[E]niwAla
+
+ar	r-le[ar]ner-la[r]nara
+
+au	U-gl[au]coma-gl[U]komA
+
+b	b-bus-basa
+	_-numb-naM
+
+bh	B-Maha[bh]arat-mahA[B]Arawa
+
+c	k-doctor-doYkatara
+	s-celebrate-selibret
+	S-cal[c]ium-kEl[S]iyama
+
+ch	k-[ch]emotherapy-[k]ImoWerapI
+	c-fren[ch]-PreM[c]a
+
+cy	sAi-motor[cy]cle-motara[sAi]kila
+
+d	da-day-de
+	x-hy[d]erabad-hE[x]arAbAxa
+	d-electrocar[d]iogram-ilektrokAr[d]iyogrAma
+
+dd	d-a[dd]iction-a[d]iksana
+
+dh	X-[Dh]aula-[X]OIA
+
+e	e-less-lesa
+	I-three-WrI
+	a-printer-printara
+	_-kone-kona
+	i-[e]lectrocardiogram-[i]lektrokArdiyogrAma
+	E-antis[e]ptic-eMtIs[E]ptika
+	y-hom[e]opathy-hom[y]opEWI
+
+ea	y-b[ea]uty-b[y]UtI
+	e-br[ea]kfast-br[e]kaPAsta
+	A-h[ea]rt-h[A]rta
+
+ee	I-pan[ee]r-pan[I]ra
+
+er	r-cholest[er]ol-kolest[r]oYla
+
+es	sa-vegetabl[es]-vejitebal[sa]
+
+eu	ayU-rh[eu]matic-r[ayU]metika
+
+
+f	P-face-Pesa
+
+ff	P-to[ff]ee-toY[P]I
+
+g	ga-game-gema
+	j-ori[g]inal-ori[j]anala
+	g-[g]land-[g]leMda
+
+h	ha-hymn-hima
+	_-hour-Aura
+	h-[h]ealth-[h]elWa
+
+he	ay-r[he]umatic-r[ay]Umetika
+
+hy	hE-[hy]derabad-[hE]xarAbAxa
+
+i	i-big-biga
+	I-pett[i]-pett[I]
+	Ay-[i]odide-[Ay]odAida
+	Aya-v[i]ral-v[Aya]rala
+	Ai-iod[i]de-Ayod[Ai]da
+	a-orig[i]nal-orij[a]nala
+	AI-pr[i]vate-pr[AI]veta
+
+io	a-addict[io]n-adikS[a]na
+
+igh	Ai-h[igh]-h[Ai]
+
+j	j-jug-jaga
+
+jh	J-[jh]arkhand-[J]AraKaNda
+
+k	k-kick-kika
+	ka-brea[k]fast-bre[ka]PAsta
+	_-knowledge-nOleja
+
+kh	K-Rani[kh]et-rAnI[K]ewa
+
+l	l-[l]evel-[l]evala
+	la-a[l]mond-A[la]manda
+	al-vegetab[l]es-vejiteb[al]sa
+
+ll	l-ga[ll]ic-gE[l]ika
+
+m	m-machine-maSIna
+	_-mnemonics-nimoniksa
+	M-ca[m]phor-kE[M]Para
+
+n	n-narrate-nareta
+	N-co[n]trol-ka[N]trola
+	M-gla[n]d-gle[M]da
+
+ng	Mg-ka[ng]ra-ka[Mg]adA
+
+nn	n-legio[nn]aire-lejiyo[n]eyara
+
+o	oY-d[o]ctor-d[oY]ktara
+	a-doct[o]r-dOkt[a]ra
+	u-move-muva
+	Au-owl-Aula
+	o-nic[o]tine-nik[o]tina
+	yo-electrocardi[o]gram-ilektrokArdi[yo]grAma
+	A-cortis[o]l-kortis[A]la
+	O-m[o]rphine-m[O]rPIna
+
+oo	U-f[oo]d-P[U]da
+
+ou	u-r[ou]tine-r[u]tIna
+
+p	P-photoghraph-PotograPa
+	p-pill-pila
+	pa-[P]anjal-[pa]MjAla
+
+per	para-pep[per]mint-pi[para]meMta
+
+ph	P-cam[ph]or-kEM[P]ara
+
+q	kyU-Queue-kyU
+	k-s[q]uash-s[k]vESa
+
+r	r-legionnai[r]e-lejiyoneya[r]a
+	d-kang[r]a-kaMga[d]A
+	ra-Kashmi[r]-kaSmI[ra]
+
+rh	r-[rh]eumatic-[r]ayUmetika
+
+rr	r-be[rr]y-be[r]I
+
+s	sa-sacrifice-sEkriPAIsa
+	s-scale-skela
+	j-vi[s]ual-vi[j]uala
+	#Sa-show-So
+	S-Eura[s]ian-yUre[S]iyana
+
+se	j-disea[se]-disI[j]a
+
+sh	S-fre[sh]-Pre[S]a
+
+ss	s-Mu[ss]oorie-ma[s]UrI
+
+t	t-table-tebala
+	th-throw-Wro
+	S-addic[t]ion-adik[S]ana
+	c-na[t]ural-ne[c]urala
+	w-pi[t]ta-pi[w]wa
+	ta-Dar[t]mouth-dAr[ta]mAuWa
+ 
+th	W-[th]row-[W]ro
+	x-[th]ere-[x]era
+
+u	yu-universe-yunivarsa
+	a-ugly-agalI
+	i-ubiquitous-yubIkvitasa
+	U-bea[u]ty-by[U]tI
+	ya-calci[u]m-kElSi[ya]ma
+	u-calend[u]la-kEleMd[u]lA
+	yU-m[u]cous-m[yU]kasa
+	v-sq[u]ash-sk[v]ESa
+
+ui	U-fr[ui]t-Pr[U]ta
+
+v	v-very-verI
+
+w	va-watch-vOca
+	null-low-lo
+	v-s[w]edish-s[v]IdiSa
+
+x	ksa-mix-miksa
+	gsa-exhaust-egsOsta
+	ks-bo[x]ing-boY[ks]iMga
+	kS-se[x]ual-se[kS]uala
+
+y	ya-yak-yAk
+	i-marry-meri
+	I-beaut[y]-byUt[I]
+	_-pay-pe
+	Ai-th[y]roid-W[Ai]roYyada
+	y-a[y]urvedic-A[y]urvexika
+
+z	za-zebra-XebrA
+	j-en[z]yme-eM[j]Aima

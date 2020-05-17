@@ -7,8 +7,8 @@ echo "Extracting root info for manual..."
 python3 $HOME_alignment/src/get_manual_root.py  manual_id_wrdid.dat manual_lwg_new.dat > manual_mapped_id_root_info.dat
 
 #Create Eng and Hindi Soumya grouping facts
-python3 $HOME_alignment/src/create_facts_from_grouping.py E_Word_Group_Sanity.dat Eng > E_grouping.dat
-python3 $HOME_alignment/src/create_facts_from_grouping.py H_Word_Group.dat Hnd > H_grouping.dat
+python3 $HOME_alignment/src/create_facts_from_grouping.py E_Word_Group_Sanity.dat Eng E_grouping_wrd.dat > E_grouping.dat
+python3 $HOME_alignment/src/create_facts_from_grouping.py H_Word_Group.dat Hnd H_grouping_wrd.dat > H_grouping.dat
 
 #Get each word with count of occurences
 python3 $HOME_alignment/src/check_each_word_occurences.py eng_wrd_occurence.dat hnd_wrd_occurence.dat
@@ -21,6 +21,9 @@ bash $HOME_alignment/get_parent_sanwawi.sh Eng Hnd
 
 #Get kriyA_mUla info from Hindi sentence:
 python3 $HOME_alignment/src/check_for_kriyA_mUla.py manual_mapped_id_root_info.dat $HOME_alignment/dics/kriyA_mUla_default_dic.txt > kriyA_mUla_info.dat
+
+#Get tam info 
+bash $HOME_alignment/extract_rt_and_tam/run.sh
 
 #Get anchors:
 python3 $HOME_alignment/src/map_slot_debug_info.py manual_id_wrdid.dat slot_debug_input.txt  > slot_debug_input_mapped.txt

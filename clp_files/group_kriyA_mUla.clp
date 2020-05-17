@@ -45,10 +45,14 @@
 (test (member$ ?id1 $?ids))
 (test (member$ (+ ?id1 1) $?ids1))
 (not (grouping_decided ?id1))
+?f2<-(Eng_label-group_words ?lab  $?wrds)
+?f3<-(Eng_label-group_words ?lab1  $?wrds1)
+
 =>
-	(retract ?f ?f1)
+	(retract ?f ?f1 ?f2 ?f3)
 	(bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
 	(assert (Eng_label-group_elements ?new_lab $?ids $?ids1))
+	(assert (Eng_label-group_words ?new_lab $?wrds $?wrds1))
 	(assert (grouping_decided ?id1))
 )
 
@@ -60,12 +64,16 @@
 (test (neq ?lab ?lab1))
 (test (member$ (first$ $?ids) $?gids))
 (test (member$ (nth$ 2 $?ids) $?gids1))
+?f2<-(Hnd_label-group_words ?lab $?wrds)
+?f3<-(Hnd_label-group_words ?lab1 $?wrds1)
 =>
 	(loop-for-count (?i 1 (length $?ids))
 		(if (and (member$ (nth$ ?i $?ids) $?gids) (member$ (nth$ (+ ?i 1) $?ids) $?gids1)) then 
-			(retract ?f ?f1)
+			(retract ?f ?f1 ?f2 ?f3)
 			(bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
 			(assert (Hnd_label-group_elements ?new_lab $?gids $?gids1))
+			(assert (Hnd_label-group_words ?new_lab $?wrds $?wrds1))
+			
 		)
 	)
 )

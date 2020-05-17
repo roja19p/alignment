@@ -13,80 +13,80 @@
  )
 
 
-(defrule check_for_yaxi_clause
-(Hnd_parent-sanwawi ?hid $?hids)
-(manual_mapped_id-word	?id yaxi)
-(test (member$ ?id $?hids))
-=>
-	(printout t "yaxi clause " $?hids crlf)
-	(assert (yaxi_clause_head_id-gids ?hid $?hids))
-)
-
-;In hindi 'yaxi' might be absent ..so using Eng 'if' identifying the clause
-(defrule check_for_if_clause
-(Eng_parent-sanwawi ?eid $?ids)
-(id-word ?id ?wrd&if)
-(test (member$ ?id $?ids))
-=>
-	(printout t "if clause "  $?ids crlf)
-	(assert (if_clause_head_id-gids ?eid  $?ids))
-)
-
-(defrule check_for_then_in_if_clause
-?f<-(Eng_parent-sanwawi ?eid $?ids)
-?f1<-(if_clause_head_id-gids ?if  $?ids)
-(id-word ?id ?wrd&then)
-(test (member$ ?id $?ids))
-=>
-	(retract ?f ?f1)
-	(bind $?ids (delete-member$ $?ids ?id))
-	(printout t "modifying_if_clause_by_removing_then " $?ids)
-	(assert (if_clause_head_id-gids ?eid  $?ids))
-	(assert (Eng_parent-sanwawi ?eid $?ids))
-)
-
-;check for then
-(defrule check_for_then_clause
-?f<-(Eng_parent-sanwawi ?eid $?ids)
-(id-word ?id ?wrd&then)
-(test (member$ ?id $?ids))
-(if_clause_head_id-gids ?if  $?gids)
-(test (subsetp $?gids $?ids))
-=>
-	(retract ?f)
-	(bind $?then_ids $?ids)
-	(loop-for-count (?i 1 (length $?then_ids))
-		(bind ?var (nth$ ?i $?then_ids))
-		(if (or (member$ ?var $?gids) (eq ?var ?if)) then
-			(bind $?ids (delete-member$ $?ids ?var))
-		)
-	)
-	(printout t "then_clause" ?eid " " $?ids)
-	(assert (then_clause_head_id-gids ?eid  $?ids))
-	(assert (Eng_parent-sanwawi ?eid $?ids))
-)
-
-(defrule check_for_wo_clause
-(declare (salience 10))
-?f<-(Hnd_parent-sanwawi ?hid $?hids)
-(manual_mapped_id-word  ?id wo)
-(test (member$ ?id $?hids))
-(yaxi_clause_head_id-gids ?yaxi_h_id $?gids)
-(test (subsetp $?gids $?hids))
-=>
-	(retract ?f)
-	(bind $?wo_ids $?hids)
-	(loop-for-count (?i 1 (length $?wo_ids))
-		(bind ?var (nth$ ?i $?wo_ids))
-		(if (or (member$ ?var $?gids) (eq ?var ?yaxi_h_id)) then
-			(bind $?hids (delete-member$ $?hids ?var))
-		)
-	)
-	(printout t "wo_clause" ?hid "  " $?hids crlf)
-	(assert (wo_clause_head_id-gids ?hid  $?hids))
-	(assert (Hnd_parent-sanwawi ?hid $?hids))
-)
-
+;(defrule check_for_yaxi_clause
+;(Hnd_parent-sanwawi ?hid $?hids)
+;(manual_mapped_id-word	?id yaxi)
+;(test (member$ ?id $?hids))
+;=>
+;	(printout t "yaxi clause " $?hids crlf)
+;	(assert (yaxi_clause_head_id-gids ?hid $?hids))
+;)
+;
+;;In hindi 'yaxi' might be absent ..so using Eng 'if' identifying the clause
+;(defrule check_for_if_clause
+;(Eng_parent-sanwawi ?eid $?ids)
+;(id-word ?id ?wrd&if)
+;(test (member$ ?id $?ids))
+;=>
+;	(printout t "if clause "  $?ids crlf)
+;	(assert (if_clause_head_id-gids ?eid  $?ids))
+;)
+;
+;(defrule check_for_then_in_if_clause
+;?f<-(Eng_parent-sanwawi ?eid $?ids)
+;?f1<-(if_clause_head_id-gids ?if  $?ids)
+;(id-word ?id ?wrd&then)
+;(test (member$ ?id $?ids))
+;=>
+;	(retract ?f ?f1)
+;	(bind $?ids (delete-member$ $?ids ?id))
+;	(printout t "modifying_if_clause_by_removing_then " $?ids)
+;	(assert (if_clause_head_id-gids ?eid  $?ids))
+;	(assert (Eng_parent-sanwawi ?eid $?ids))
+;)
+;
+;;check for then
+;(defrule check_for_then_clause
+;?f<-(Eng_parent-sanwawi ?eid $?ids)
+;(id-word ?id ?wrd&then)
+;(test (member$ ?id $?ids))
+;(if_clause_head_id-gids ?if  $?gids)
+;(test (subsetp $?gids $?ids))
+;=>
+;	(retract ?f)
+;	(bind $?then_ids $?ids)
+;	(loop-for-count (?i 1 (length $?then_ids))
+;		(bind ?var (nth$ ?i $?then_ids))
+;		(if (or (member$ ?var $?gids) (eq ?var ?if)) then
+;			(bind $?ids (delete-member$ $?ids ?var))
+;		)
+;	)
+;	(printout t "then_clause" ?eid " " $?ids)
+;	(assert (then_clause_head_id-gids ?eid  $?ids))
+;	(assert (Eng_parent-sanwawi ?eid $?ids))
+;)
+;
+;(defrule check_for_wo_clause
+;(declare (salience 10))
+;?f<-(Hnd_parent-sanwawi ?hid $?hids)
+;(manual_mapped_id-word  ?id wo)
+;(test (member$ ?id $?hids))
+;(yaxi_clause_head_id-gids ?yaxi_h_id $?gids)
+;(test (subsetp $?gids $?hids))
+;=>
+;	(retract ?f)
+;	(bind $?wo_ids $?hids)
+;	(loop-for-count (?i 1 (length $?wo_ids))
+;		(bind ?var (nth$ ?i $?wo_ids))
+;		(if (or (member$ ?var $?gids) (eq ?var ?yaxi_h_id)) then
+;			(bind $?hids (delete-member$ $?hids ?var))
+;		)
+;	)
+;	(printout t "wo_clause" ?hid "  " $?hids crlf)
+;	(assert (wo_clause_head_id-gids ?hid  $?hids))
+;	(assert (Hnd_parent-sanwawi ?hid $?hids))
+;)
+;
 ;[If an element of interference or uncertainty occurs] then the environment is stochastic.
 (defrule align_if_clause
 (if_clause_head_id-gids ?if_head  $?gids)
@@ -112,26 +112,26 @@
 )
 
 
-(defrule get_main_clause_frm_rel_clause
-?f<-(Eng_parent-sanwawi ?e_p $?eids)
-(Eng_parent-sanwawi ?e_p1 $?eids1)
-(test (neq ?e_p ?e_p1))
-(id-word ?id ?wrd&which|that)
-(test (eq (nth$ 1 $?eids1) ?id))
-(test (member$ ?id  $?eids))
-;(test (subsetp (create$ ?e_p1 $?eids) $?eids1))
-(not (clause_decided ?e_p))
-=>
-	(retract ?f)
-	(bind $?n (sort > (create$ ?e_p1 $?eids1)))
-	(printout t (type $?eids) crlf)
-	(printout t (type $?n) crlf)
-	(bind ?new_ids (delete-member$ $?eids $?n))
-	(printout t ?new_ids crlf)
-	(assert (Eng_parent-sanwawi ?e_p ?new_ids))
-	(assert (clause_decided ?e_p))
-)	
-
+;(defrule get_main_clause_frm_rel_clause
+;?f<-(Eng_parent-sanwawi ?e_p $?eids)
+;(Eng_parent-sanwawi ?e_p1 $?eids1)
+;(test (neq ?e_p ?e_p1))
+;(id-word ?id ?wrd&which|that)
+;(test (eq (nth$ 1 $?eids1) ?id))
+;(test (member$ ?id  $?eids))
+;;(test (subsetp (create$ ?e_p1 $?eids) $?eids1))
+;(not (clause_decided ?e_p))
+;=>
+;	(retract ?f)
+;	(bind $?n (sort > (create$ ?e_p1 $?eids1)))
+;	(printout t (type $?eids) crlf)
+;	(printout t (type $?n) crlf)
+;	(bind ?new_ids (delete-member$ $?eids $?n))
+;	(printout t ?new_ids crlf)
+;	(assert (Eng_parent-sanwawi ?e_p ?new_ids))
+;	(assert (clause_decided ?e_p))
+;)	
+;
 
 ;lakRya rAjyoM aksara eka lakRya parIkRaNa xvArA nirxiRta kara rahe hEM [jo kisI BI lakRya rAjya ko sanwuRta karanA cAhie].
 (defrule  align_jo_clause
@@ -176,8 +176,28 @@
 =>
 	(retract ?f)
         (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?e2 ?h2))
+	(assert (anchor_decided_e_id-h_id ?e2 ?h2))
 	(assert (anchor_decided ?e2))
 )
+
+
+(defrule remove_pot_if_anc_decided
+(declare (salience -2))
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids)
+;(not (iter-type-eng_g_id-h_g_id ? anchor ?id ?))
+(anchor_decided_e_id-h_id ?id1 ?hid)
+(test (neq ?id ?id1))
+(test (member$ ?hid $?hids))
+=>
+        (retract ?f)
+        (bind ?new_id (delete-member$ $?hids ?hid))
+        (if (>= (length ?new_id) 1) then
+                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id ?new_id))
+        else
+                (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id  0))
+        )
+)
+
 
 ;[Rational Action] is the action that maximizes the expected value of the performance measure given the percept sequence to date.
 ;[yukwisafgawa kriyA], vaha kriyA howI hE, jo wiWi karane ke lie boXa anukrama meM xie gae niRpAxana mApa ke apekRiwa mUlya ko aXikawama karawI hE.
@@ -192,8 +212,39 @@
 (test (and (neq ?rel case) (neq ?rel aux))) ;Ex: He [can] ask questions through a teletype and receives answers from both A and B.
 (test (neq ?rel1 case))
 (not (hnd_relation_name-head-chiid case ?h2 ?)) ;Ex: He can ask questions [through] a teletype and receives answers from both A and B.
+(not (anchor_decided ?e2))
 =>
 	(assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h2))
+	(assert (anchor_decided ?e2))
+)
+
+
+(defrule align_thru_unlabeled_info1
+(eng_relation_name-head-chiid ?rel ?e1 ?e2)
+(iter-type-eng_g_id-h_g_id ?iter  anchor ?e2 $?hids)
+(hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
+(test (member$ ?h2 $?hids))
+(hindi_head_id-grp_ids ?h1 $?h2_ids)
+(not (iter-type-eng_g_id-h_g_id ? ? ?e1 $?))
+(test (neq ?e1 0)) ;Is it that which characterize humans?
+(not (iter-type-eng_g_id-h_g_id ? anchor ? ?h1))  ;Turing's 'imitation game' is now usually called 'the Turing test' for intelligence.
+=>
+        (assert (iter-type-eng_g_id-h_g_id 1 anchor ?e1 ?h1))
+)
+
+
+;This [view] is the cognitive science [approach] to AI.
+;yaha [xqRtikoNa] eAI ke lie saFjFAnAwmaka vijFAna [xqRtikoNa] hE  .
+(defrule align_thru_unlabeled_info_whn_fact_avl1
+(eng_relation_name-head-chiid ?rel ?e1 ?e2)
+(iter-type-eng_g_id-h_g_id ?iter  anchor ?e2 $?hids)
+(hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
+(test (member$ ?h2 $?hids))
+(hindi_head_id-grp_ids ?h1 $?h2_ids)
+(iter-type-eng_g_id-h_g_id ?iter1 potential ?e1 $?)
+(not (iter-type-eng_g_id-h_g_id ? anchor  ? ?h1))  ; One room has one computer.
+=>
+        (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?e1 ?h1))
 )
 
 
@@ -205,9 +256,11 @@
 (hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
 (test (member$ ?h1 $?hids1))
 (test (member$ ?h2 $?hids2))
+(not (anchor_decided ?e2))
 =>
 	(retract ?f1)
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter1 1) anchor ?e2 ?h2))
+	(assert (anchor_decided ?e2))
 )
 
 
@@ -220,6 +273,7 @@
 (not (eng_relation_name-head-chiid cop ?e2 ?)) ;If an element of interference or uncertainty occurs then the environment [is stochastic].
 (hindi_head_id-grp_ids ?h $?hids)
 (test (member$ ?h2 $?hids))
+(not (iter-type-eng_g_id-h_g_id ?  ? ? $? ?h $?))
 =>
         (assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h))
 )
@@ -242,7 +296,7 @@
  
 (defrule align_transliterate_wrd
 (eng_wrd-transliterate_wrd ?wrd ?hwrd)
-(id-word ?id ?wrd)
+(id-original_word ?id  ?wrd)
 (manual_mapped_id-word ?hid ?hwrd)
 (not (iter-type-eng_g_id-h_g_id ?  ? ?id $?))
 =>
@@ -252,7 +306,7 @@
 
 (defrule align_transliterate_wrd_in_pot
 (eng_wrd-transliterate_wrd ?wrd ?hwrd)
-(id-word ?id ?wrd)
+(id-original_word ?id  ?wrd)
 (manual_mapped_id-word ?hid ?hwrd)
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id $?)
 =>
@@ -261,7 +315,82 @@
 )
 
 
+;Aligning through tam info
+(defrule align_thru_tam_info
+(id-tam_info_ids  ?eid ?hid $?hids)
+?f<-(iter-type-eng_g_id-h_g_id ?iter ?potential ?eid $?)
+(hindi_head_id-grp_ids ?hid $?hgids)
+(not (anchor_decided ?eid ?hid))
+=>
+	(retract ?f)
+	(bind $?ids (create$ ?hid $?hids))
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?eid ?hid))	
+	(assert (anchor_decided ?eid ?hid))
+)
 
+
+(defrule align_thru_tam_info1
+(id-tam_info_ids  ?eid ?hid $?hids)
+(hindi_head_id-grp_ids ?hid $?hgids)
+(not (iter-type-eng_g_id-h_g_id ?iter ?potential ?eid $?))
+(not (anchor_decided ?eid ?hid))
+=>
+	(bind $?ids (create$ ?hid $?hids))
+	(assert (anchor_decided ?eid ?hid))
+)
+
+;A system with intelligence is [expected] to [behave] as intelligently as a human. 
+;buxXi se yukwa praNAlI se mAnava kI waraha buxXimAnI se [vyavahAra karane kI]	[apekRA kI jAwI hE]  . 
+;(defrule correcting_hindi_head_id_gids_fact_using_kriyA_mUla_info
+;(verb_root_hid-gids ?hid $?gids)
+;?f<-(hindi_head_id-grp_ids ?hid1 $?hgids1)
+;?f1<-(hindi_head_id-grp_ids ?hid2 $?hgids2)
+;(test (member$ ?hid $?hgids1))
+;(test (subsetp $?hgids2 $?gids))
+;(not (group_corrected ?hid))
+;=>
+;	(retract ?f ?f1)
+;	(bind ?new_ids (delete-member$ $?hgids1 ?hid))
+;	(assert (hindi_head_id-grp_ids ?hid1 ?new_ids))
+;	(assert (hindi_head_id-grp_ids ?hid $?gids))
+;	(assert (group_corrected ?hid))
+;)
+;
+;
+
+;Combining two different hindi groups based on dic and anchor fact
+;He can ask questions [[through] [a teletype]] and receives answers from both A and B.
+;vaha [eka telItAipa ke] [mAXyama se] savAla pUCa sakawe hEM Ora xonoM e Ora bI se javAba prApwa kara sakawe hEM  .  )
+(defrule align_prep_using_dic
+(or (id-root ?id ?rt) (id-conll_root ?id ?rt))
+(not (iter-type-eng_g_id-h_g_id  ? ? ?id $?))
+(Eng_label-group_elements ?elab $?eids)
+(test (member$ ?id $?eids))
+(iter-type-eng_g_id-h_g_id  ?iter anchor ?id1 $?ids ?i)
+(test (member$ ?id1 $?eids))
+(id-org_wrd-root-dbase_name-mng ? ? ?rt default-iit-bombay-shabdanjali-dic_smt.gdbm $?mngs)
+?f<-(Hnd_label-group_elements ?hlab $?hids1 ?h)
+(test (subsetp $?ids $?hids1))
+?f1<-(Hnd_label-group_elements ?hlab2 $?hids2)
+(test (member$ (+ ?h 1) $?hids2))
+?f2<-(Hnd_label-group_words ?hlab $?h_wrds ?hw)
+?f3<-(Hnd_label-group_words ?hlab2 $?h_wrds1)
+?f4<-(hindi_head_id-grp_ids ?i $?hids)
+?f5<-(hindi_head_id-grp_ids ?h1 $?h_ids)
+(test (member$ ?h $?hids))
+(test (member$ (+ ?h 1) $?h_ids))
+(test (neq ?i ?h1))
+=>
+	(bind $?new_mng (create$ ?hw $?h_wrds1))
+	(if (eq $?mngs $?new_mng) then
+		(retract ?f ?f1 ?f2 ?f3)
+		(bind ?new_lab (string-to-field (str-cat ?hlab "_" ?hlab2)))
+		(assert (Hnd_label-group_elements ?new_lab $?hids1 ?h $?hids2))
+		(assert (Hnd_label-group_words ?new_lab  $?h_wrds ?hw $?h_wrds1))
+		(assert (hindi_head_id-grp_ids ?i $?hids $?h_ids))
+		(printout t ?rt " " $?mngs crlf)
+	)
+)
 
 
 

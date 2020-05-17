@@ -7,7 +7,8 @@
 (hindi_head_id-grp_ids ?h $?hids)
 (P1_tmp ?id  $?pids)
 (test (eq $?pids $?hids))
-(not (iter-type-eng_g_id-h_g_id ?iter1 potential ? ?h))
+;(not (iter-type-eng_g_id-h_g_id ?iter1 potential ? ?h)) ; Counter ex: A system with intelligence is [expected] [to] behave in the best possible manner.  buxXi se yukwa praNAlI se [apekRA kI jAwI hE] ki vaha uwwama se uwwama Dafga se vyavahAra kare.
+;Here both words 'expected' and 'to' are having same meanings..but once p1 is decided then no need of checking other fact.
 =>
 	(retract ?f)
 )
@@ -56,7 +57,8 @@
 (P1_tmp ?id  $?pids)
 (hindi_head_id-grp_ids ?hid $?gids)
 (test (member$ ?hid  $?pids))
-(not (iter-type-eng_g_id-h_g_id ?iter ?type ? $? ?hid $?))
+;(not (iter-type-eng_g_id-h_g_id ?iter ?type ? $? ?hid $?)) ; Counter ex: A system with intelligence is [expected] [to] behave in the best possible manner.  buxXi se yukwa praNAlI se [apekRA kI jAwI hE] ki vaha uwwama se uwwama Dafga se vyavahAra kare.
+;Here both words 'expected' and 'to' are having same meanings..but once p1 is decided then no need of checking other fact.
 =>
 	(assert (iter-type-eng_g_id-h_g_id 2 anchor ?id ?hid))
 ;	(assert (iter-type-eng_g_id-h_g_id ?iter anchor ?id $?pids))

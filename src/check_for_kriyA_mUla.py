@@ -69,17 +69,20 @@ def return_ids(wrd, start_id):
     ids = []
     ids.append(str(start_id))
     for i in range(1, len(lst)):
-        ids.append(str(start_id+i))
+        ids.append(str(int(start_id)+i))
     return ids    
 
 
 for key in sorted(hrt_dic):
     new_k_m_l= []
     if key in kriyA_mUla:
-        ids = return_ids(key, int(hrt_dic[key]))
-        val = key + ' ' + ' '.join(ids)
-        if val not in new_k_m_l:
-           new_k_m_l.append(val)
+        #print(key, hrt_dic[key])
+        s = str(hrt_dic[key]).split('/')
+        for each in s:
+            ids = return_ids(key, each)
+            val = key + ' ' + ' '.join(ids)
+            if val not in new_k_m_l:
+               new_k_m_l.append(val)
     else:
         out = check_substring(kriyA_mUla, key)
         if out != None:
@@ -95,4 +98,6 @@ for key in sorted(hrt_dic):
                             if val not in new_k_m_l:
                                 new_k_m_l.append(val)
     if new_k_m_l != []:
-        print('(kriyA_mUla_wrd-ids ', ' '.join(new_k_m_l), ')')
+        for each in new_k_m_l:
+            lst = each.split()
+            print('(kriyA_mUla_wrd-ids ', ' '.join(lst), ')')

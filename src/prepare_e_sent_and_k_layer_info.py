@@ -5,7 +5,7 @@ for line in open(sys.argv[1]):
     lst = line[:-2].split()
     e_sent.append(lst[1]+'_'+lst[2])
 
-print('English_Words'+'\t'+'\t'.join(e_sent))
+print('English_Sentence'+'\t'+'\t'.join(e_sent))
 length = len(e_sent)
 
 K_layer_info_dic = {}
