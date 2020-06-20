@@ -158,7 +158,7 @@
 ?f<-(iter-type-eng_g_id-h_g_id ?iter anchor ?which ?hid)
 (Hnd_parent-sanwawi ?par ?jo $?ids)
 (manual_mapped_id-word ?jo ?hwrd&wAki|jo)
-(test (eq (member$ ?hid $?ids) FALSE))
+(test (neq (member$ ?hid $?ids) FALSE))
 =>
 	(retract ?f)
 )
@@ -199,10 +199,34 @@
 )
 
 
+;So, 17 for example, which is a [prime number] has only two factors 1 and 17.
+;wo, 17 uxAharaNa ke lie, jo eka aBAjya safKyA hE, kevala xo kAraka 1 Ora 17 hE  .
+(defrule align_thru_labelled_info
+(declare (salience 1))
+(eng_relation_name-head-chiid ?rel ?e1 ?e2)
+(hnd_relation_name-head-chiid ?rel ?h1 ?h2)
+?f<-(iter-type-eng_g_id-h_g_id ?iter  potential ?e1 $?hids)
+(test (member$ ?h1 $?hids))
+(hindi_head_id-grp_ids ?h $?h_ids)
+(test (member$ ?h1 $?h_ids))
+(test (member$ ?h2 $?h_ids))
+(not (iter-type-eng_g_id-h_g_id ? anchor  ? ?h)) 
+(clause_boundry_head-childs ?h $?cids)
+(test (member$ ?e1 $?cids))
+(test (member$ ?e2 $?cids))
+=>
+	(retract ?f)
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1)  anchor ?e1 ?h))
+)
+	
+
+
+
 ;[Rational Action] is the action that maximizes the expected value of the performance measure given the percept sequence to date.
 ;[yukwisafgawa kriyA], vaha kriyA howI hE, jo wiWi karane ke lie boXa anukrama meM xie gae niRpAxana mApa ke apekRiwa mUlya ko aXikawama karawI hE.
 (defrule align_thru_unlabeled_info
 (eng_relation_name-head-chiid ?rel ?e1 ?e2)
+(not (eng_relation_name-head-chiid ?rel ?e1 ?e3))
 (iter-type-eng_g_id-h_g_id ?iter  anchor ?e1 $?hids)
 (hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
 (test (member$ ?h1 $?hids))
@@ -213,6 +237,9 @@
 (test (neq ?rel1 case))
 (not (hnd_relation_name-head-chiid case ?h2 ?)) ;Ex: He can ask questions [through] a teletype and receives answers from both A and B.
 (not (anchor_decided ?e2))
+(clause_boundry_head-childs ?h $?cids)
+(test (member$ ?e1 $?cids))
+(test (member$ ?e2 $?cids))
 =>
 	(assert (iter-type-eng_g_id-h_g_id 1 anchor ?e2 ?h2))
 	(assert (anchor_decided ?e2))
@@ -228,6 +255,9 @@
 (not (iter-type-eng_g_id-h_g_id ? ? ?e1 $?))
 (test (neq ?e1 0)) ;Is it that which characterize humans?
 (not (iter-type-eng_g_id-h_g_id ? anchor ? ?h1))  ;Turing's 'imitation game' is now usually called 'the Turing test' for intelligence.
+(clause_boundry_head-childs ?h $?cids)
+(test (member$ ?e1 $?cids))
+(test (member$ ?e2 $?cids))
 =>
         (assert (iter-type-eng_g_id-h_g_id 1 anchor ?e1 ?h1))
 )
@@ -242,7 +272,10 @@
 (test (member$ ?h2 $?hids))
 (hindi_head_id-grp_ids ?h1 $?h2_ids)
 (iter-type-eng_g_id-h_g_id ?iter1 potential ?e1 $?)
-(not (iter-type-eng_g_id-h_g_id ? anchor  ? ?h1))  ; One room has one computer.
+(not (iter-type-eng_g_id-h_g_id ? ?anchor  ? ?h1))  ;One of the rooms contains a computer.
+(clause_boundry_head-childs ?h $?cids)
+(test (member$ ?e1 $?cids))
+(test (member$ ?e2 $?cids))
 =>
         (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?e1 ?h1))
 )
@@ -257,6 +290,10 @@
 (test (member$ ?h1 $?hids1))
 (test (member$ ?h2 $?hids2))
 (not (anchor_decided ?e2))
+(not (eng_relation_name-head-chiid ?rel1 ?e1 ?)) ;There are critical problems like missile launch and anything related to that, or even a satellite rocket firing and all [that], [these] are all mission critical systems.
+(clause_boundry_head-childs ?h $?cids)
+(test (member$ ?e1 $?cids))
+(test (member$ ?e2 $?cids))
 =>
 	(retract ?f1)
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter1 1) anchor ?e2 ?h2))
@@ -303,12 +340,15 @@
 	(assert (iter-type-eng_g_id-h_g_id  1 anchor ?id ?hid))
 )
 
-
+;To avoid wrong alignment added 'restricted_eng_words.gdbm' conditions for below example.
+;The emphasis in this case [is] on the inferencing mechanism, and its properties.            
+;[isa] mAmale meM anumAna wanwra, Ora isake guNoM para [jora xiyA gayA hE]  .
 (defrule align_transliterate_wrd_in_pot
 (eng_wrd-transliterate_wrd ?wrd ?hwrd)
 (id-original_word ?id  ?wrd)
 (manual_mapped_id-word ?hid ?hwrd)
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?id $?)
+(test (eq (gdbm_lookup "restricted_eng_words.gdbm" ?wrd) FALSE))
 =>
 	(retract ?f)
         (assert (iter-type-eng_g_id-h_g_id  (+ ?iter 1) anchor ?id ?hid))
@@ -338,6 +378,32 @@
 	(bind $?ids (create$ ?hid $?hids))
 	(assert (anchor_decided ?eid ?hid))
 )
+
+
+(defrule align_using_verb_fact
+(anu_id-manu_verb_root-ids ?eid ?hmng $?hids)
+?f<-(hindi_head_id-grp_ids ?h $?hgids)
+(test (member$ $?hids $?hgids))
+(iter-type-eng_g_id-h_g_id ?iter potential ?eid $?)
+(not (iter-type-eng_g_id-h_g_id ? ? ? ?h))
+=>
+	(retract ?f)
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?eid ?h))
+)
+
+
+(defrule align_using_verb_fact1
+(anu_id-manu_verb_root-ids ?eid ?hmng $?hids)
+(hindi_head_id-grp_ids ?h $?hgids)
+(test (member$ $?hids $?hgids))
+(not (iter-type-eng_g_id-h_g_id ? ? ?eid $?))
+(not (iter-type-eng_g_id-h_g_id ? ? ? ?h))
+=>
+;	(retract ?f)
+        (assert (iter-type-eng_g_id-h_g_id 1 anchor ?eid ?h))
+)
+
+
 
 ;A system with intelligence is [expected] to [behave] as intelligently as a human. 
 ;buxXi se yukwa praNAlI se mAnava kI waraha buxXimAnI se [vyavahAra karane kI]	[apekRA kI jAwI hE]  . 

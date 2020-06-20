@@ -1886,7 +1886,7 @@ exit	svargavAsa_ho/mara_jA/maFca_Coda/bAhara_calA_jA
 exonerate	niRpApa_TaharA/xoRa-mukwa_kara
 exorcise	BUwa_BagA
 expand	PEla_jA/viswAra_kara/vikasIwa_ho
-expect	ASA_raKa/ummIxa_raKa/ummIxa_lagA/ummIxa_kara/raKa_le/rAha_xeKa/kabula_kara/AsarA_xeKa/ASA_kara
+expect	ASA_raKa/ummIxa_raKa/ummIxa_lagA/ummIxa_kara/raKa_le/rAha_xeKa/kabula_kara/AsarA_xeKa/ASA_kara/apekRA_raKa
 expedite	SIGrawA_kara/SIGra_nibatA
 expel	niRkAsiwa_kara/nikAla_bAhara_kara
 expend	vyaya_kara/Karca_kara

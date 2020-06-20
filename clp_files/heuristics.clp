@@ -31,7 +31,7 @@
 (test (neq (numberp ?wrd) TRUE))
 (test (eq (sub-string (- (length ?wrd) 1) (length ?wrd) ?wrd) "ly"))
 (manual_mapped_id-word	?hid ?hwrd)
-(manual_mapped_id-word  =(+ ?hid 1) rUpa)
+(manual_mapped_id-word  =(+ ?hid 1) rUpa|Dafga)
 (manual_mapped_id-word  =(+ ?hid 2) se)
 (not (hid_id_decided ?hid))
 =>

@@ -33,4 +33,4 @@ for i in range(1, count+1):
         left_over_lst.append(str(i))
 
 
-print('(' + lab + '_left_over_ids'+ '\t' + ' '.join(left_over_lst) + ')')
+print('(' + lab + '_left_over_ids'+ ' ' +  ' '.join(left_over_lst) + ')')

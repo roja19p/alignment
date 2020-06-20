@@ -92,20 +92,27 @@
 
 ;Goal states are often specified by [a goal test] which any goal state must satisfy.
 (defrule decide_anchor
-?f<-(eng_id-possible_suggestion ?id $?ids)
+?f<-(eng_id-possible_suggestion ?id $?pre ?ids $?post)
 ?f1<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids)
-(test (neq (length $?ids) 0));Counter ex: ai1E , 2.113
+;(test (neq (length $?ids) 0));Counter ex: ai1E , 2.113
+(hindi_head_id-grp_ids ?h $?h_gids)
+(test (member$ ?ids $?h_gids))
+(not (iter-type-eng_g_id-h_g_id ? ? ? ?h))
 =>
 	(retract ?f ?f1)	
-	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?id $?ids))
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id $?pre ?ids $?post))
+;	(assert 
 )
 
 
 ;Goal states are often specified by [a goal test] which any goal state must satisfy.
 (defrule decide_anchor1
-?f<-(eng_id-possible_suggestion ?id $?ids)
+?f<-(eng_id-possible_suggestion ?id ?hid)
+(hindi_head_id-grp_ids ?h $?h_gids)
+(test (member$ ?hid $?h_gids))
 (not (anchor_decided ?id))
-(not (iter-type-eng_g_id-h_g_id ?iter potential ?id $?hids))
+(not (iter-type-eng_g_id-h_g_id ? ? ?id ?))
+(not (iter-type-eng_g_id-h_g_id ? ? ? ?hid))
 (test (neq (length $?ids) 0))
 =>
 	(retract ?f)

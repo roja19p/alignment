@@ -1,4 +1,7 @@
 
+(deftemplate manual_word_info (slot head_id (default 0))(multislot word (default 0))(multislot word_components (default 0))(multislot root (default 0))(multislot root_components (default 0))(multislot vibakthi (default 0))(multislot vibakthi_components (default 0))(slot tam (default 0))(multislot tam_components (default 0))(multislot group_ids (default 0)))
+
+
 ;To align compound mng when one is fixed
 ;In this meeting the term "[Artificial Intelligence]" was adopted.
 ;isa bETaka meM '[aXyayanAwmaka prajFA]' Sabxa ko apanAyA gayA  .
@@ -93,4 +96,115 @@
 	(bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
 	(assert (Hnd_label-group_elements ?new_lab $?gids ?id (+ ?id 1)  $?gids1))
 ) 	
-	
+
+
+;Decide using default dic:
+(defrule decide_anchor_using_dic
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $? ?hid $?)
+;?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id ?hid)
+(or (manual_mapped_id-word  ?hid ?hwrd) (manual_mapped_id-root ?hid ?hwrd))
+(id-org_wrd-root-dbase_name-mng ? ? ?rt  default-iit-bombay-shabdanjali-dic_smt.gdbm ?hwrd)
+(or (id-root ?id ?rt) (id-conll_root ?id ?rt))
+(hindi_head_id-grp_ids ?head_id $?ids)
+(test (member$ ?hid $?ids))
+(not (anchor_decided_e_id-h_id ?id  ?head_id))
+=>
+       (retract ?f)
+       (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id ?head_id))
+       (assert (anchor_decided_e_id-h_id ?id  ?head_id))
+;      (assert (anchor_decided ?head_id))
+)
+
+
+;Decide using default dic:
+(defrule decide_anchor_using_dic1
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id 0)
+(or (manual_mapped_id-word  ?hid ?hwrd) (manual_mapped_id-root ?hid ?hwrd))
+(id-org_wrd-root-dbase_name-mng ? ? ?rt  default-iit-bombay-shabdanjali-dic_smt.gdbm ?hwrd)
+(or (id-root ?id ?rt) (id-conll_root ?id ?rt))
+(hindi_head_id-grp_ids ?head_id $?ids)
+(test (member$ ?hid $?ids))
+(not (anchor_decided_e_id-h_id ?id  ?head_id))
+(not (iter-type-eng_g_id-h_g_id ? anchor ? ?head_id)) ;[Goal] states are often specified by a goal test which any goal state must satisfy.`
+=>
+       (retract ?f)
+       (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id ?head_id))
+       (assert (anchor_decided_e_id-h_id ?id  ?head_id))
+;      (assert (anchor_decided ?head_id))
+)
+
+
+;Align using 'P' layer
+;2.52
+;when eng id potential/anchor fact not available
+(defrule using_P_layer
+(declare (salience -1))
+(manual_word_info (head_id ?phead_id) (word ?wrd $?) (group_ids $?gids1))
+(manual_parserid-wordid ?phead_id ?head_id)
+(hindi_head_id-grp_ids ?head_id $?gids)
+(not (iter-type-eng_g_id-h_g_id ? ? ?  $? ?head_id $?))
+(anu_id-anu_mng-sep-man_id-man_mng_tmp ?eid $? - ?phead_id $?mng)
+(not (iter-type-eng_g_id-h_g_id ? ? ?eid  $? ))
+(not (anchor_decided_e_id-h_id ?eid  ?head_id))
+(test (member$ ?wrd $?mng))
+=>
+	(assert (iter-type-eng_g_id-h_g_id 1 anchor  ?eid  ?head_id))
+	(assert (anchor_decided_e_id-h_id ?eid  ?head_id))
+)
+
+;when eng id potential fact available
+(defrule using_P_layer1
+(declare (salience -1))
+(manual_word_info (head_id ?phead_id) (word ?wrd $?) (group_ids $?gids1))
+(manual_parserid-wordid ?phead_id ?head_id)
+(hindi_head_id-grp_ids ?head_id $?gids)
+;(not (iter-type-eng_g_id-h_g_id ? ? ?  $? ?head_id $?))
+(anu_id-anu_mng-sep-man_id-man_mng_tmp ?eid $? - ?phead_id $?mng)
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid  $?ids )
+(not (anchor_decided_e_id-h_id ?eid  ?head_id))
+(test (member$ ?wrd $?mng))
+(not (iter-type-eng_g_id-h_g_id ? anchor ?  ?head_id))
+=>
+	(retract ?f)
+        (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor  ?eid  ?head_id))
+        (assert (anchor_decided_e_id-h_id ?eid  ?head_id))
+)
+
+;E, 2.3
+;So, those things require a lot of [careful] calculation and all that.
+;wo, una cIjoM ke lie bahuwa [sAvaXAnI se] gaNanA Ora saba kuCa kI AvaSyakawA hE  . 
+(defrule using_P_layer2
+(declare (salience -2))
+(manual_word_info (head_id ?phead_id) (word ?wrd $?) (group_ids $?gids1))
+(manual_parserid-wordid ?phead_id ?head_id)
+(hindi_head_id-grp_ids ?head_id $?gids)
+(anu_id-anu_mng-sep-man_id-man_mng_tmp ?eid $? - ?phead_id $?mng)
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid  $? ?head_id $?)
+(not (anchor_decided_e_id-h_id ?eid  ?head_id))
+(test (member$ ?wrd $?mng))
+(id-org_wrd-root-dbase_name-mng ? ? ?rt default-iit-bombay-shabdanjali-dic_smt.gdbm ?wrd $?)
+(id-root ?eid ?rt)
+=>
+	(retract ?f)
+        (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor  ?eid  ?head_id))
+        (assert (anchor_decided_e_id-h_id ?eid  ?head_id))
+)
+
+;;E , 2.3
+;So, those things require a [lot] of careful calculation and all that.
+;wo, una cIjoM ke lie [bahuwa] sAvaXAnI se gaNanA Ora saba kuCa kI AvaSyakawA hE  . 
+(defrule using_anusaaraka_K_layer
+(declare (salience -3))
+(id-Apertium_output ?eid  ?mng $?mngs)
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?eid  $?ids )
+(manual_mapped_id-word ?hid ?mng)
+(hindi_head_id-grp_ids ?head_id $?gids)
+(test (member$ ?hid $?gids))
+(id-org_wrd-root-dbase_name-mng ? ? ?rt default-iit-bombay-shabdanjali-dic_smt.gdbm ?mng $?)
+(id-root ?id ?rt)
+(not (iter-type-eng_g_id-h_g_id ? anchor ? ?head_id)) ;[Goal] states are often specified by a goal test which any goal state must satisfy.`
+=>
+	(retract ?f)
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor  ?eid  ?head_id))
+        (assert (anchor_decided_e_id-h_id ?eid  ?head_id))
+)	

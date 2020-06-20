@@ -38,22 +38,23 @@
 )
 
 
-;Decide using default dic:
-(defrule decide_anchor_using_dic
-?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id ?hid)
-(manual_mapped_id-word	?hid ?hwrd)
-(id-org_wrd-root-dbase_name-mng ? ? ?rt  default-iit-bombay-shabdanjali-dic_smt.gdbm ?hwrd)
-(or (id-root ?id ?rt) (id-conll_root ?id ?rt))
-(hindi_head_id-grp_ids ?head_id $?ids)
-(test (member$ ?hid $?ids))
-(not (anchor_decided ?head_id))
-=>
-	(retract ?f)
-	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?id ?head_id))
-	(assert (anchor_decided_e_id-h_id ?id  ?head_id))
-	(assert (anchor_decided ?head_id))
-)
-
+;;Decide using default dic:
+;(defrule decide_anchor_using_dic
+;?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id $? ?hid $?)
+;;?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id ?hid)
+;(or (manual_mapped_id-word  ?hid ?hwrd) (manual_mapped_id-root ?hid ?hwrd))
+;(id-org_wrd-root-dbase_name-mng ? ? ?rt  default-iit-bombay-shabdanjali-dic_smt.gdbm ?hwrd)
+;(or (id-root ?id ?rt) (id-conll_root ?id ?rt))
+;(hindi_head_id-grp_ids ?head_id $?ids)
+;(test (member$ ?hid $?ids))
+;(not (anchor_decided_e_id-h_id ?id  ?head_id))
+;=>
+;	(retract ?f)
+;	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id ?head_id))
+;	(assert (anchor_decided_e_id-h_id ?id  ?head_id))
+;;	(assert (anchor_decided ?head_id))
+;)
+;
 ;A system with intelligence is expected to behave in the [best] possible manner.
 ;buxXi se yukwa praNAlI se apekRA kI jAwI hE ki vaha [uwwama se uwwama] Dafga se vyavahAra kare  .
 ;Decide using default dic if anchor/potential fact not available
@@ -84,6 +85,9 @@
 (not (iter-type-eng_g_id-h_g_id ? ? ?id $?))
 (not (iter-type-eng_g_id-h_g_id ? ? ? $? ?hid $?))
 (not (anchor_decided ?hid))
+(hindi_head_id-grp_ids ?head_id $?ids)
+(test (member$ ?hid $?ids))
+(not (iter-type-eng_g_id-h_g_id ?iter anchor ? ?head_id)) ;It [has] also [helped] us understand the complexity of modeling human reasoning.
 =>
 	(bind ?mng (gdbm_lookup "default-iit-bombay-shabdanjali-dic_smt.gdbm" ?rt))
         (bind $?mngs  (explode$ (implode$ (remove_character "/"  ?mng " "))))

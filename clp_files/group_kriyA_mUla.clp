@@ -34,6 +34,24 @@
         (assert (id-HM-source-grp_rts ?id ?mng ?s $?pre ?r $?post))
  )
 
+;Group apekRA_kara/raKa
+(defrule group_apekRA_kara/raKa
+(declare (salience 2))
+?f<-(Hnd_label-group_elements ?lab ?hid)
+?f1<-(Hnd_label-group_elements ?lab1 =(+ ?hid 1) $?hids)
+(manual_mapped_id-word ?hid apekRA)
+(manual_mapped_id-root  =(+ ?hid 1) kara|raKa)
+?f2<-(hindi_head_id-grp_ids ? $? ?hid)
+?f3<-(hindi_head_id-grp_ids =(+ ?hid 1) =(+ ?hid 1) $?hids)
+;(not (iter-type-eng_g_id-h_g_id ? ? ? $?pre ?hid $?post))
+=>
+        (retract ?f ?f1 ?f2 ?f3 )
+	(bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
+	(assert (Hnd_label-group_elements ?new_lab ?hid (+ ?hid 1) $?hids))
+        (assert (hindi_head_id-grp_ids ?hid ?hid (+ ?hid 1) $?hids))
+)
+
+
 ;As parser splits for kriyA mUla correct the grouping
 (defrule correct_eng_grouping_kriyA_mUla
 (id-HM-source-grp_ids ?id ?mng ?source $?gids)
@@ -103,7 +121,41 @@
 		(assert (eng_id_decided ?id))
 	)
 )		
-            
+
+;The [emphasis] in this case is on the inferencing mechanism, and its properties.            
+;isa mAmale meM anumAna wanwra, Ora isake guNoM para [jora xiyA gayA hE]  .
+(defrule kriyA_mula1
+(verb_root_hid-gids ?vid $?gids)
+?f<-(Hnd_label-group_elements ?lab  ?vid )
+?f1<-(Hnd_label-group_elements ?lab1 $?ids)
+(test (subsetp $?ids $?gids))
+?f2<-(hindi_head_id-grp_ids ?vid ?vid)
+?f3<-(hindi_head_id-grp_ids ?hid $?ids)
+?f4<-(iter-type-eng_g_id-h_g_id ?iter ?type ?eid $?pre ?hid $?post)
+(test (neq ?lab ?lab1))
+=>
+	(retract ?f ?f1 ?f2 ?f3 ?f4)
+	(bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
+	(assert (Hnd_label-group_elements ?new_lab ?vid  $?ids))
+	(assert (hindi_head_id-grp_ids ?vid ?vid $?ids))
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) ?type ?eid ?vid $?pre $?post))
+)	
+	
+
+(defrule kriyA_mula2
+(verb_root_hid-gids ?vid $?gids)
+?f<-(Hnd_label-group_elements ?lab  ?vid )
+?f1<-(Hnd_label-group_elements ?lab1 $?ids)
+(test (subsetp $?ids $?gids))
+?f2<-(hindi_head_id-grp_ids ?vid ?vid)
+?f3<-(hindi_head_id-grp_ids ?hid $?ids)
+(not (iter-type-eng_g_id-h_g_id ? ? ? $?pre ?hid $?post))
+=>
+        (retract ?f ?f1 ?f2 ?f3 )
+        (bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
+        (assert (Hnd_label-group_elements ?new_lab ?vid  $?ids))
+        (assert (hindi_head_id-grp_ids ?vid ?vid $?ids))
+)
 
 
 ;

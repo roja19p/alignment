@@ -16,26 +16,27 @@
 ;ex: ai2E, 2.10, An autonomous agent decides [autonomously] which action to take in the current situation to maximize progress towards its goals.
 ;eka svAyawwa ejeMta [svAyawwa rUpa se] waya karawA hE ki mOjUxA sWiwi meM apane lakRyoM kI xiSA meM pragawi ko aXikawama karane ke lie kOna sI kArravAI karanI hE.
 ;If potential ids are subset of P1 fixed slot then remove the potential fact
-(defrule check_hin_ids_in_p
-(declare (salience 9))
-(P1_tmp ?id  $?pids)
-?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id1 $?ids)
-(hindi_head_id-grp_ids ?hid $?h_ids )
-(test (member$ ?hid $?ids))
-(test (member$ $?h_ids $?pids))
-(test (neq $?h_ids $?pids))
-=>
-	(retract ?f)
-	(bind ?new_ids (delete-member$ $?ids ?hid))
-	(printout t ?new_ids  crlf)
-	(if (>= (length ?new_ids) 1) then 
-		(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_ids))
-	else
-		(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 0))
-	)
-
-)
-
+;(defrule check_hin_ids_in_p
+;(declare (salience 9))
+;(P1_tmp ?id  $?pids)
+;?f<-(iter-type-eng_g_id-h_g_id ?iter potential ?id1 $?ids)
+;(hindi_head_id-grp_ids ?hid $?h_ids )
+;(test (member$ ?hid $?ids))
+;(test (eq (member$ ?hid $?pids) FALSE))
+;;(test (member$ $?h_ids $?pids))
+;;(test (neq $?h_ids $?pids))
+;=>
+;	(retract ?f)
+;	(bind ?new_ids (delete-member$ $?ids ?hid))
+;	(printout t ?new_ids  crlf)
+;	(if (>= (length ?new_ids) 1) then 
+;		(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 ?new_ids))
+;	else
+;		(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id1 0))
+;	)
+;
+;)
+;
 (defrule merge_group_ids_if_p1_fixed
 (declare (salience 9))
 ?f<-(hindi_head_id-grp_ids ?hid  $?ids)
