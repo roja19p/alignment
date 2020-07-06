@@ -38,6 +38,8 @@ python3 $HOME_alignment/src/create_facts_from_conll.py hindi_dep_parser_original
 
 python3 $HOME_alignment/src/get_root_frm_conll.py E_conll_enhanced_without_punc.tsv > eng_conll_root.dat
 
+python3  $HOME_alignment/src/map_std_dep.py new_version_std.dat > eng_std_facts.dat
+
 #Generating P1 layer
 echo "(defglobal ?*path* = $HOME_alignment)" > alignment_path.clp
 timeout 100 myclips -f $HOME_alignment/clp_files/run.bat > new_layer.error
@@ -72,7 +74,7 @@ sed 's/,/\t/g' p2_layer_with_wrd.csv > p2_layer_with_wrd.tsv
 sed 's/,/\t/g' p2_left_over_wrds.txt > p2_left_over_wrds.tsv
 
 
-python3 $HOME_alignment/src/prepare_e_sent_and_k_layer_info.py original_word.dat  id_Apertium_output.dat  sentence_info.txt > info.tsv
+python3 $HOME_alignment/src/prepare_e_sent_and_k_layer_info.py original_word.dat  id_Apertium_output.dat  sentence_info.txt anu_trn.txt > info.tsv
 
 #cat H_sentence_with_ids.dat  H_grouping.tsv E_grouping.tsv info.tsv p_layer_with_wrd.tsv p2_layer_with_wrd.tsv p2_left_over_wrds.txt > Complete_alignment.csv
 cat info.tsv p2_layer_with_wrd.tsv p_layer_with_wrd.tsv p2_left_over_wrds.tsv H_sentence_with_ids.dat H_grouping.tsv E_grouping.tsv > Complete_alignment.csv
@@ -88,4 +90,5 @@ wx_utf8 < p2_left_over_wrds.tsv > p2_left_over_wrds_utf8.tsv
 
 #cat info.tsv p2_layer_with_wrd_utf8.tsv p_layer_with_wrd_utf8.tsv p2_left_over_wrds_utf8.tsv H_sentence_with_ids_utf8.dat  H_grouping.tsv E_grouping.tsv > Complete_alignment_utf8.csv
 
+cat info.tsv H_sentence_with_ids_utf8.dat anu_trn.txt p2_layer_with_wrd_utf8.tsv p_layer_with_wrd_utf8.tsv p2_left_over_wrds_utf8.tsv H_grouping.tsv E_grouping.tsv  > p2_alignment_utf8.csv
 ####################

@@ -58,6 +58,7 @@
 (hindi_head_id-grp_ids ?h_hid $?hids)
 (test (member$ ?hid $?hids))
 (hindi_head_id-grp_ids =(- ?h_hid 1) $?)
+(not (iter-type-eng_g_id-h_g_id ? ? ? $? (- ?h_hid 1) $?))
 =>
 	(retract ?f)
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?eid (- ?h_hid 1)))

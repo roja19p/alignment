@@ -9,8 +9,11 @@
 (test (eq $?pids $?hids))
 ;(not (iter-type-eng_g_id-h_g_id ?iter1 potential ? ?h)) ; Counter ex: A system with intelligence is [expected] [to] behave in the best possible manner.  buxXi se yukwa praNAlI se [apekRA kI jAwI hE] ki vaha uwwama se uwwama Dafga se vyavahAra kare.
 ;Here both words 'expected' and 'to' are having same meanings..but once p1 is decided then no need of checking other fact.
+(not (potential_anchor_decided ?id 0))
 =>
 	(retract ?f)
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) potential ?id 0))
+	(assert (potential_anchor_decided ?id 0))
 )
 
 ;ex: ai2E, 2.10, An autonomous agent decides [autonomously] which action to take in the current situation to maximize progress towards its goals.
@@ -56,6 +59,7 @@
 (defrule decide_anchor_if_p1_decided
 (declare (salience 8))
 (P1_tmp ?id  $?pids)
+(not (P1_tmp ?id1  $?pids))
 (hindi_head_id-grp_ids ?hid $?gids)
 (test (member$ ?hid  $?pids))
 ;(not (iter-type-eng_g_id-h_g_id ?iter ?type ? $? ?hid $?)) ; Counter ex: A system with intelligence is [expected] [to] behave in the best possible manner.  buxXi se yukwa praNAlI se [apekRA kI jAwI hE] ki vaha uwwama se uwwama Dafga se vyavahAra kare.
@@ -65,6 +69,20 @@
 ;	(assert (iter-type-eng_g_id-h_g_id ?iter anchor ?id $?pids))
 )
 
+
+;;Check if any repeation id in group
+;(defrule check_rpt_id
+;(hindi_head_id-grp_ids ?hid $?gids)
+;(hindi_head_id-grp_ids (+ ?hid 1) $?gids1)
+;=>
+;	(loop-for-count (?i 1 (length $?gids))
+;		(bind ?id (nth$ ?i $?gids)) 
+;		(if (member$ ?id $?gids1) then
+;			(assert (repeated_ids ?id))
+;		)
+;	)
+;)
+;
 
 ;(defrule decide_anchor_using_grouping
 ;(declare (salience 7))

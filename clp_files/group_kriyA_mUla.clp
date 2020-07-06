@@ -85,15 +85,15 @@
 ?f2<-(Hnd_label-group_words ?lab $?wrds)
 ?f3<-(Hnd_label-group_words ?lab1 $?wrds1)
 =>
-	(loop-for-count (?i 1 (length $?ids))
-		(if (and (member$ (nth$ ?i $?ids) $?gids) (member$ (nth$ (+ ?i 1) $?ids) $?gids1)) then 
+;	(loop-for-count (?i 1 (length $?ids))
+;		(if (and (member$ (nth$ ?i $?ids) $?gids) (member$ (nth$ (+ ?i 1) $?ids) $?gids1)) then 
 			(retract ?f ?f1 ?f2 ?f3)
 			(bind ?new_lab (string-to-field (str-cat ?lab "_" ?lab1)))
 			(assert (Hnd_label-group_elements ?new_lab $?gids $?gids1))
 			(assert (Hnd_label-group_words ?new_lab $?wrds $?wrds1))
 			
-		)
-	)
+;		)
+;	)
 )
 
 (defrule align_kriyA_mUla_group
@@ -105,7 +105,8 @@
 (Hnd_label-group_elements ?hlab $?hids)
 (test (member$ ?kid $?hids))
 (test (neq (gdbm_lookup "default-iit-bombay-shabdanjali-dic.gdbm" (str-cat ?rt "_verb")) FALSE))
-(not (eng_id_decided ?id))
+;(not (eng_id_decided ?id))
+;(not (and (hid_id_decided ?j) (test (member$ ?j $?hids))))
 =>
 	(bind ?mng (gdbm_lookup "default-iit-bombay-shabdanjali-dic.gdbm" (str-cat ?rt "_verb")))
         (bind $?mngs  (explode$ (implode$ (remove_character "/"  ?mng " "))))
@@ -114,11 +115,12 @@
 		(bind ?new_id ?kid)
 		(loop-for-count (?i 2 (length $?hids)) 
 			(bind ?new_id (string-to-field (str-cat ?new_id "," (nth$ ?i $?hids))))
-			(assert (hid_id_decided (nth$ ?i $?hids)))
+	;		(assert (hid_id_decided (nth$ ?i $?hids)))
 		)
+		(printout t ?new_id $?hids crlf)
 		(bind ?new_id  (explode$ (implode$ (remove_character ","  ?new_id " "))))
 		(assert (P1_tmp ?id ?new_id))
-		(assert (eng_id_decided ?id))
+	;	(assert (eng_id_decided ?id))
 	)
 )		
 
@@ -156,6 +158,21 @@
         (assert (Hnd_label-group_elements ?new_lab ?vid  $?ids))
         (assert (hindi_head_id-grp_ids ?vid ?vid $?ids))
 )
+
+;Check if any repeation id in group
+(defrule check_rpt_id
+(hindi_head_id-grp_ids ?hid $?gids)
+(hindi_head_id-grp_ids ?hid1 $?gids1)
+(test (neq ?hid ?hid1))
+=>
+       (loop-for-count (?i 1 (length $?gids))
+               (bind ?id (nth$ ?i $?gids)) 
+               (if (member$ ?id $?gids1) then
+                       (assert (repeated_ids ?id))
+               )
+       )
+)
+
 
 
 ;

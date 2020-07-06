@@ -65,11 +65,11 @@
 (hindi_head_id-grp_ids ?head_id $?ids)
 (test (member$ ?hid $?ids))
 (not (anchor_decided ?head_id))
-(not (iter-type-eng_g_id-h_g_id ?iter ? ?id ?));Checking there is no potential/anchor fact for 'best'
-(not (iter-type-eng_g_id-h_g_id ?iter ? ? $? ?head_id $?)) ;Checking 'uwwama' is not aligned in any other fact.
+(not (iter-type-eng_g_id-h_g_id ? ? ?id $?));Checking there is no potential/anchor fact for 'best'
+(not (iter-type-eng_g_id-h_g_id ? ? ? $? ?head_id $?)) ;Checking 'uwwama' is not aligned in any other fact.
 (id-cat_coarse ?id ?cat&~preposition)
 =>
-        (assert (iter-type-eng_g_id-h_g_id 1 anchor ?id ?head_id))
+        (assert (iter-type-eng_g_id-h_g_id 1 potential ?id ?head_id))
         (assert (anchor_decided_e_id-h_id ?id  ?head_id))
 	(assert (anchor_decided ?head_id))
 )

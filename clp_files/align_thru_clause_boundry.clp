@@ -254,7 +254,7 @@
 (hindi_head_id-grp_ids ?h1 $?h2_ids)
 (not (iter-type-eng_g_id-h_g_id ? ? ?e1 $?))
 (test (neq ?e1 0)) ;Is it that which characterize humans?
-(not (iter-type-eng_g_id-h_g_id ? anchor ? ?h1))  ;Turing's 'imitation game' is now usually called 'the Turing test' for intelligence.
+(not (iter-type-eng_g_id-h_g_id ? ?anchor ? ?h1))  ;Turing's 'imitation game' is now usually called 'the Turing test' for intelligence.
 (clause_boundry_head-childs ?h $?cids)
 (test (member$ ?e1 $?cids))
 (test (member$ ?e2 $?cids))
@@ -271,13 +271,13 @@
 (hnd_relation_name-head-chiid ?rel1 ?h1 ?h2)
 (test (member$ ?h2 $?hids))
 (hindi_head_id-grp_ids ?h1 $?h2_ids)
-(iter-type-eng_g_id-h_g_id ?iter1 potential ?e1 $?)
-(not (iter-type-eng_g_id-h_g_id ? ?anchor  ? ?h1))  ;One of the rooms contains a computer.
+?f<-(iter-type-eng_g_id-h_g_id ?iter1 potential ?e1 $?)
+(not (iter-type-eng_g_id-h_g_id ? ?anchor  ? $? ?h1 $?))  ;One of the rooms contains a computer. We will look at this example in more detail as we go long, and try to find other ways of writing it, and examine other features, but essentially this is a good way of illustrating programming.
 (clause_boundry_head-childs ?h $?cids)
 (test (member$ ?e1 $?cids))
 (test (member$ ?e2 $?cids))
 =>
-        (assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor ?e1 ?h1))
+        (assert (iter-type-eng_g_id-h_g_id (+ ?iter1 1) anchor ?e1 ?h1))
 )
 
 
@@ -376,6 +376,7 @@
 (not (anchor_decided ?eid ?hid))
 =>
 	(bind $?ids (create$ ?hid $?hids))
+	(assert (iter-type-eng_g_id-h_g_id  1 anchor ?eid ?hid)) ;The general rule for the range function is that you start with i and you increment or decrement if k is negative, in steps of k such that you keep going as far as possible without crossing j.	
 	(assert (anchor_decided ?eid ?hid))
 )
 

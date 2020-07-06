@@ -13,8 +13,14 @@ for line in open(sys.argv[1]):
 for line in open(sys.argv[2]):
     headid = re.findall(r'head_id \d+', line)
     root = re.findall(r'root [^)]+', line)
+    grp_ids = re.findall(r'group_ids [^)]+[ ]*', line)
 
     head_id = headid[0][8:]
     m_root = root[0][5:]
+    g_ids = grp_ids[0][9:].split()[0]
 
-    print('(manual_mapped_id-root',  pid_wid_dic[int(head_id)],  m_root, ')')
+    if g_ids == head_id:
+        print('(manual_mapped_id-root',  pid_wid_dic[int(head_id)],  m_root, ')')
+    else: #laser, 2.13
+        print('(manual_mapped_id-root',  pid_wid_dic[int(g_ids)],  m_root, ')')
+

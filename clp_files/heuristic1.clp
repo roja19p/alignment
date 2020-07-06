@@ -14,6 +14,7 @@
 (not (iter-type-eng_g_id-h_g_id ? ? =(- ?eid 1) ?))
 (hindi_head_id-grp_ids ?h $?hids)
 (test (member$ (- ?hid 1) $?hids))
+(test (member$ ?hid $?hids));#Counter ex: So, this will consists of different steps such as a cleaning the room, preparing the stage, [making sure] the decoration are up, arranging the chairs and so on.
 (not (iter-type-eng_g_id-h_g_id ? anchor ? ?h)) ; ai1E , 2.2 Artificial Intelligence is concerned with the design of intelligence in an artificial device.
 =>
 	(assert (iter-type-eng_g_id-h_g_id 1 anchor (- ?eid 1) ?h))
@@ -44,6 +45,7 @@
 ?f<-(iter-type-eng_g_id-h_g_id ?iter potential =(- ?eid 1) $?)
 (hindi_head_id-grp_ids ?h $?hids)
 (test (member$ (- ?hid 1) $?hids))
+(test (member$ ?hid $?hids));#Counter ex: So, this will consists of different steps such as a cleaning the room, preparing the stage, [making sure] the decoration are up, arranging the chairs and so on. 
 (not (iter-type-eng_g_id-h_g_id ? anchor ? ?h))
 =>
 	(retract ?f)
@@ -207,4 +209,22 @@
 	(retract ?f)
 	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor  ?eid  ?head_id))
         (assert (anchor_decided_e_id-h_id ?eid  ?head_id))
-)	
+)
+
+;align using mwe 
+;A [prime number] is one which is divisible by no other number other rather than 1 and itself.
+;[aBAjya safKyA] vaha hE, jo 1 Ora svayaM se Binna kisI anya safKyA se viBAjya nahIM hE  .
+(defrule using_mwe
+(ids-cmp_mng-head-cat-mng_typ-priority $?ids ?mng ?h ?oun ? ?)
+?f<-(iter-type-eng_g_id-h_g_id ?iter potential  ?eid $? ?hid $?)
+(test (eq (nth$ ?h $?ids) ?eid))
+(hindi_head_id-grp_ids ?head_id $?gids)
+(test (member$ ?hid $?gids))
+(or (manual_mapped_id-root ?j  ?rt)
+(manual_mapped_id-word ?j ?rt))
+(test (member$ ?j $?gids))
+=>
+	(retract ?f)
+	(assert (iter-type-eng_g_id-h_g_id (+ ?iter 1) anchor  ?eid  ?head_id))
+)
+	

@@ -30,3 +30,22 @@
 	(retract ?f)
 )
 
+(defrule get_remaining_clause
+(declare (salience -3))
+(clause_boundry_head-childs ?M $?daughters)
+(Node-Category ?M SBAR)
+(clause_boundry_head-childs ?M1 $?daughters1)
+(Node-Category ?M1 S)
+(test (subsetp $?daughters $?daughters1))
+;(not (clause_boundry_head-childs ? $?var))
+=>
+	(bind ?n (nth$  1 $?daughters))
+	(bind $?var (create$ ))
+	(loop-for-count (?i 1 (- ?n 1))
+		(bind $?var (create$ $?var ?i))
+	)
+	(assert (clause_boundry_head-childs S $?var))
+)
+	
+
+

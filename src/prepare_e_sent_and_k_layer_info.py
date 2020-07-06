@@ -5,6 +5,7 @@ Eng_sent = []
 Hnd_sent = []
 
 f = open(sys.argv[3], 'w')
+f1 = open(sys.argv[4], 'w')
 
 for line in open(sys.argv[1]):
     lst = line[:-2].split()
@@ -51,7 +52,8 @@ out=os.popen(command).readlines()
 #print(out)
 
 #print('Anusaaraka Translation' +'\t' + '\t'.join(K_layer_info)), 
-print('Anusaaraka Translation' +'\t' + '\t'.join(out).strip()), 
+#print('Anusaaraka Translation' +'\t' + '\t'.join(out).strip()), 
+f1.write('Anusaaraka Translation' +'\t' + '\t'.join(out).strip()+ '\n')
            
 
 
