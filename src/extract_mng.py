@@ -54,7 +54,7 @@ rt_lst = []
 for each in pure_hnd_lst:
 #    print(each)
     path = os.getenv('HOME_anu_test')
-    morph_command = 'echo ' + each + ' | lt-proc -ca ' + path + '/bin/hi.morf.bin'
+    morph_command = 'echo ' + each + ' |  apertium-destxt | lt-proc -ca ' + path + '/bin/hi.morf.bin | apertium-retxt'
     #print(morph_command)
     out=os.popen(morph_command).readlines()
     for mo in out:

@@ -51,9 +51,11 @@ for line in open(sys.argv[1]):
         val = col + '_' + wrdid
         if src != 'partial_match' and src != 'hindi_wordnet_match_using_dic':
             if val not in e_lst:
-              if e_lst[int(col)-1] == '':
-                e_lst[int(col)-1] =  wrdid
-              else:
+                if len(e_lst) > int(col)-1 and  e_lst[int(col)-1] == '':
+                    e_lst[int(col)-1] =  wrdid
+                elif len(e_lst) < int(col)-1:
+                    e_lst.append(wrdid)
+            else:
                 if wrdid not in e_lst[int(col)-1].split('/'):
                     e_lst[int(col)-1] =  e_lst[int(col)-1] + '/' + wrdid
     if 'no_match_found' in line.strip():
@@ -79,10 +81,17 @@ for line in open(sys.argv[1]):
     if 'no_match_found' in line.strip():
         lst = line.strip().split()
         if '+' not in lst[1]:
-            g_lst[int(lst[1])-1] = lst[1]
+            if len(g_lst) > int(lst[1])-1:
+                g_lst[int(lst[1])-1] = lst[1]
+            else:
+                g_lst.append(lst[1])
         else:
             a = lst[1].split('+')
-            g_lst[int(a[0])-1] = lst[1]
+    #        print(a, lst[1], len(g_lst))
+            if len(g_lst) > int(a[0])-1:
+                g_lst[int(a[0])-1] = lst[1]
+            else: #2.21 Mitesh Khapra
+                g_lst.append(lst[1])
 
 
 
@@ -91,11 +100,13 @@ for line in open(sys.argv[1]):
 #To print hindi group head and ids
 for i in range(0, len(g_lst)):
     lst = g_lst[i].split('+')
-    plst = p_lst[i].split('+')
     if lst != ['']:
         print('(hindi_head_id-grp_ids', i+1 , ' '.join(lst), ')')
-    if plst != ['']:    
-        print('(hindi_head_id-grp_ids', i+1 , ' '.join(plst), ')') #Disabling partial match data in anchor and potential slot ...only storing head and grp ids
+    #print(len(p_lst), i)
+    if len(p_lst) > i:
+        plst = p_lst[i].split('+')
+        if plst != ['']:    
+           print('(hindi_head_id-grp_ids', i+1 , ' '.join(plst), ')') #Disabling partial match data in anchor and potential slot ...only storing head and grp ids
 
 #print(g_lst)
 #print(p_lst)

@@ -8,7 +8,8 @@ for line in open(sys.argv[1]):
     p_id_w_id_dic[int(lst[1])] = int(lst[2])
 
 def replace_pid_with_id(string, par_id):
-    string = re.sub(par_id, str(p_id_w_id_dic[int(par_id)]), string)
+    if int(par_id) in p_id_w_id_dic.keys():
+        string = re.sub(par_id, str(p_id_w_id_dic[int(par_id)]), string)
     return string
 
 def check_for_mul_ids(ids):

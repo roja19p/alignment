@@ -20,7 +20,9 @@ for line in open(sys.argv[2]):
     g_ids = grp_ids[0][9:].split()[0]
 
     if g_ids == head_id:
-        print('(manual_mapped_id-root',  pid_wid_dic[int(head_id)],  m_root, ')')
+        if int(head_id) in pid_wid_dic.keys():
+            print('(manual_mapped_id-root',  pid_wid_dic[int(head_id)],  m_root, ')')
     else: #laser, 2.13
-        print('(manual_mapped_id-root',  pid_wid_dic[int(g_ids)],  m_root, ')')
+        if int(g_ids) in pid_wid_dic.keys():
+            print('(manual_mapped_id-root',  pid_wid_dic[int(g_ids)],  m_root, ')')
 

@@ -8,6 +8,7 @@
 	(retract ?f)
 	(bind $?gids (create$ ))
 	(loop-for-count (?i 1 ?id)
+		(printout t $?gids "  " ?i crlf)
 		(bind $?gids (create$ $?gids ?i))
 	)
 	(assert (hnd_clause_hid-childs ?id  $?gids))
@@ -80,11 +81,14 @@
 ;aba eka progrAma ko maSIna xvArA niRpAxiwa karane kI AvaSyakawA nahIM hE @PUNCT-Comma hAlAzki vaha kampyUtara progrAmiMga kA viSiRta sanxarBa hogA hama ummIxa kara rahe We ki eka kampyUtara apane caraNoM ko niRpAxiwa karegA  .
 (defrule get_initial_clause_info_for_kriyA_mUla
 ?f<-(verb_root-id ?v_rt ?id)
+(test (neq (numberp ?id) TRUE)) ;To avoid segmentation fault. Ex: Mitesh_eng , 2.2 And we did a bunch of things and now you move on to the next module where we talk about something known as Deep Dream very interestingly titled.
+;Ora hama cIjoM kA eka gucCA kiyA Ora aba Apa agale moYdyUla para le jAez jahAM hama dIpa drIma bahuwa xilacaspa SIrRaka ke rUpa meM jAnA jAwA kuCa ke bAre meM bAwa karawe hEM  . 
 (test (neq (str-index "+" ?id) FALSE))
 (verb_root_hid-gids ?h  $?hids)
-(not (hnd_clause_hid-childs $?))
+(not (hnd_clause_hid-childs ?h $?))
 (test (eq ?h (string-to-field (sub-string 1 (- (str-index "+" ?id) 1) ?id))))
 =>
+	(printout t ?h " " (string-to-field (sub-string 1 (- (str-index "+" ?id) 1) ?id)) crlf)
 	(retract ?f)
         (bind $?gids (create$ ))
 	(bind ?last_id (nth$ (length $?hids) $?hids)) 

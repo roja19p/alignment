@@ -42,7 +42,7 @@ python3  $HOME_alignment/src/map_std_dep.py new_version_std.dat > eng_std_facts.
 
 #Generating P1 layer
 echo "(defglobal ?*path* = $HOME_alignment)" > alignment_path.clp
-timeout 100 myclips -f $HOME_alignment/clp_files/run.bat > new_layer.error
+timeout 500 myclips -f $HOME_alignment/clp_files/run.bat > new_layer.error
 
 sed -i 's/dummy //g' new_layer_p2.dat
 #Converting P2 layer fact to csv 

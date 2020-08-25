@@ -204,16 +204,17 @@ for each in f3:
 for key in sorted(v_rt_dic):
     k = key-1
     wrd = return_key(str(k), h_wrd_dict)
-    k_m_w = wrd + '_' + v_rt_dic[key]
-    if k_m_w in kriyA_mUla_lst:
-        del v_rt_dic[key]
-        if k_m_w not in v_rt_dic:
-            v_rt_dic[k_m_w] = str(k) + '+' + str(key)
-        else:
-            v_rt_dic[k_m_w] = v_rt_dic[k_m_w] + '/'+ str(k) + '+' + str(key)
-        new_key = str(k) + '+' + str(key)
-        tam_dic[new_key] = tam_dic[key]
-        gnp_dic[new_key] = gnp_dic[key]
+    if wrd != None:
+        k_m_w = wrd + '_' + v_rt_dic[key]
+        if k_m_w in kriyA_mUla_lst:
+           del v_rt_dic[key]
+           if k_m_w not in v_rt_dic:
+              v_rt_dic[k_m_w] = str(k) + '+' + str(key)
+           else:
+              v_rt_dic[k_m_w] = v_rt_dic[k_m_w] + '/'+ str(k) + '+' + str(key)
+           new_key = str(k) + '+' + str(key)
+           tam_dic[new_key] = tam_dic[key]
+           gnp_dic[new_key] = gnp_dic[key]
 #        print('**', k, tam_dic[new_key])
 #        if tam_dic[new_key] not in man_tam_dic.keys():
         
@@ -222,12 +223,12 @@ for key in sorted(v_rt_dic):
         #man_tam_dic[new_key] =  man_tam_dic[key]
 #        else:
 #            man_tam_dic[tam_dic[new_key]] = str(k) + '/'+ man_tam_dic[tam_dic[new_key]]
-        del tam_dic[key]
-        del gnp_dic[key]
-    else:
-        val = v_rt_dic[key]
-        del v_rt_dic[key]
-        v_rt_dic[val] = key
+           del tam_dic[key]
+           del gnp_dic[key]
+        else:
+            val = v_rt_dic[key]
+            del v_rt_dic[key]
+            v_rt_dic[val] = key
 
 for key in sorted(v_rt_dic):
     val = v_rt_dic[key]

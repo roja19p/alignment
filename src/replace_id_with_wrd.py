@@ -17,7 +17,7 @@ for line in open(sys.argv[2]):
     lst = line.strip().split(',')
     new_lst=[]
     for each in lst:
-        if ' ' not in each and each != label and each != '0':
+        if ' ' not in each and each != label and each != '0' and each in hwrd_dic.keys():
             new_lst.append(each+'_'+hwrd_dic[each])
         elif ' ' in each:
             item = each.split()
