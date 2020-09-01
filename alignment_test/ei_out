@@ -1,0 +1,264 @@
+Calling NER ...
+Saving
+real	0m42.751s
+user	0m42.808s
+sys	0m6.141s
+Running Alignment upto P layer ...
+
+real	0m21.288s
+user	0m17.449s
+sys	0m2.973s
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+Parsing file: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/one_sentence_per_line.txt
+Parsing [sent. 1 len. 2]: test .
+Parsing [sent. 2 len. 19]: Let us start with the basic definition of what we mean by an algorithm and what programming is .
+Parsing [sent. 3 len. 20]: As most of you probably know , an algorithm is a description of how to systematically perform some task .
+Parsing [sent. 4 len. 22]: An algorithm consists of a sequence of steps which can we think of as a recipe in order to achieve something .
+Parsed file: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/one_sentence_per_line.txt [4 sentences].
+Parsed 63 words in 4 sentences (25.22 wds/sec; 1.60 sents/sec).
+Word Grouping ...
+No definitions found for "programming"
+No definitions found for "."
+No definitions found for ","
+No definitions found for "."
+No definitions found for "consists", perhaps you mean:
+gcide:  Consist
+No definitions found for "steps", perhaps you mean:
+gcide:  Step
+No definitions found for "."
+Calling Transliteration..
+
+real	0m22.238s
+user	0m16.394s
+sys	0m6.190s
+1.1
+2.1
+Generating P2 layer ...
+Extracting root info for manual...
+Extracting K layer root and Tam info...
+Extract verb info..
+Extract root and tam info for a verb..
+Extract kriyA_mUla Root and ids info...
+Alignining Verb using tam...
+K tam layer ['K_exact_with_tam_analysis', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+['K_exact_with_tam_analysis', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+0 K_exact_with_tam_analysis
+Aligning Verb...
+Traceback (most recent call last):
+  File "/home/anuslap1/alignment/src/map_std_dep.py", line 15, in <module>
+    hid = hid[0][1:-1]
+IndexError: list index out of range
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+
+2.2
+Generating P2 layer ...
+Extracting root info for manual...
+Extracting K layer root and Tam info...
+Extract verb info..
+Extract root and tam info for a verb..
+Extract kriyA_mUla Root and ids info...
+Alignining Verb using tam...
+K tam layer ['K_exact_with_tam_analysis', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+['K_exact_with_tam_analysis', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+0 K_exact_with_tam_analysis
+Aligning Verb...
+Traceback (most recent call last):
+  File "/home/anuslap1/alignment/src/map_std_dep.py", line 15, in <module>
+    hid = hid[0][1:-1]
+IndexError: list index out of range
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+2.3
+Generating P2 layer ...
+Extracting root info for manual...
+Extracting K layer root and Tam info...
+Extract verb info..
+Extract root and tam info for a verb..
+Extract kriyA_mUla Root and ids info...
+Alignining Verb using tam...
+K tam layer ['K_exact_with_tam_analysis', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+['K_exact_with_tam_analysis', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-']
+0 K_exact_with_tam_analysis
+Aligning Verb...
+Traceback (most recent call last):
+  File "/home/anuslap1/alignment/src/map_std_dep.py", line 15, in <module>
+    hid = hid[0][1:-1]
+IndexError: list index out of range
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+  ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/1.1/graph_output: No such file or directory
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/1.1/english_left_over.dat: No such file or directory
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/1.1/graph_output-hi-en: No such file or directory
+2.1
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.1/graph_output: No such file or directory
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.1/english_left_over.dat: No such file or directory
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.1/graph_output-hi-en: No such file or directory
+2.2
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.2/graph_output: No such file or directory
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.2/english_left_over.dat: No such file or directory
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.2/graph_output-hi-en: No such file or directory
+[PRNTUTIL2] Syntax Error:  Check appropriate syntax for RHS patterns.
+Function load-facts encountered an error
+[PRCCODE4] Execution halted during the actions of defrule get_trans_and_count_diff_facts.
+--
+CLIPS>  (load-facts "left_over_ids1.dat")
+[ARGACCES2] Function load-facts was unable to open file left_over_ids1.dat.
+FALSE
+--
+CLIPS>  (load-facts "left_over_ids1.dat")
+[ARGACCES2] Function load-facts was unable to open file left_over_ids1.dat.
+FALSE
+2.3
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.3/graph_output: No such file or directory
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.3/english_left_over.dat: No such file or directory
+extract_key_in_hindi_phrase.c: In function ‘main’:
+extract_key_in_hindi_phrase.c:41:31: error: ‘sample_patterns’ undeclared (first use in this function)
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+extract_key_in_hindi_phrase.c:41:31: note: each undeclared identifier is reported only once for each function it appears in
+ #define PATTERN_COUNT (sizeof(sample_patterns)/sizeof(AC_PATTERN_t))
+                               ^
+extract_key_in_hindi_phrase.c:153:17: note: in expansion of macro ‘PATTERN_COUNT’
+     for (i=0; i<PATTERN_COUNT; i++)
+                 ^~~~~~~~~~~~~
+make: *** [extract_key_in_hindi_phrase.o] Error 1
+cat: /home/anuslap1/tmp_anu_dir/tmp/ei_tmp/2.3/graph_output-hi-en: No such file or directory
