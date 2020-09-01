@@ -1,10 +1,10 @@
 MYPATH=`pwd`
-#source activate irshad_parser
+source activate irshad_parser
 echo "Running Anusaaraka .."
 time Anusaaraka_stanford.sh $1 0 True $3 onesent > $1_out 2>&1
 echo "Running Alignment upto P layer ..."
 time Anusaaraka_alignment.sh $1 $2 $3 nsdp >> $1_out  2>&1
-#conda deactivate
+conda deactivate
 ##exit
 cd $HOME_alignment/shell_scripts
 sh  get_conll.sh $HOME_anu_tmp/tmp/$1_tmp/one_sentence_per_line.txt $HOME_anu_tmp/tmp/$1_tmp/
