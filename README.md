@@ -55,25 +55,3 @@ O/p::  libreoffice $HOME_anu_tmp/tmp/ei_tmp/2.1/p2_alignment_utf8.csv
 	sh run_mul_nmt.sh ei
 
 O/p::  libreoffice $HOME_anu_tmp/tmp/ei_tmp/2.1/p3_alignment_utf8.csv
-
-
-#
-#Note:
-#####
-	**** Please run:
-		 bash full_compile.sh 
-		 (whenever git pull is done in $HOME_anu_test)
-
-#Pre-requisites:
-* anusaaraka need to be installed
-* mini anaconda
-* irshaad parser
-* sudo apt-get install dict-gcide python-gdbm
-
-#URL:
-git clone https://github.com/roja19p/alignment.git
-
-
-#Set path in ~/.bashrc
-export HOME_alignment=$HOME/alignment
-
