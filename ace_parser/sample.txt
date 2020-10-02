@@ -1,0 +1,47 @@
+LTOP: h0
+INDEX: e2
+HCONS: < h0 qeq h1 h5 qeq h7 h11 qeq h13 h16 qeq h18 h22 qeq h24 >
+ICONS: < > 
+Rama is a son of King Dasharath.
+ h0=h1 h5=h7 h11=h13 h16=h18 h22=h24 
+---------------------------------------------------------------------------------------------
+Information, in this section, is for programmers only
+Main_Table: ids,c_ids,word,LBL_val,ARG0_val
+['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] ['1', '1', '2', '3', '4', '5', '5', '5', '5', '6'] ['Rama', 'Rama', 'is', 'a', 'son', 'King Dasharath.', 'King Dasharath.', 'King', 'King', 'Dasharath.'] ['h4', 'h7', 'h1', 'h10', 'h13', 'h15', 'h18', 'h21', 'h24', 'h18'] ['x3', 'x3', 'e2', 'x9', 'x9', 'x14', 'e19', 'x20', 'x20', 'x14']
+VC_PREDS:vc_pred_ids,ARGs_counts
+[3, 5, 7, 9] [3, 2, 3, 2]
+---------------------------------------------------------------------------------------------
+RELS_LIST_IDS
+['Rama', 'proper_q', '<0:4>', 'h4', 'x3']
+['Rama', 'named', '<0:4>', 'h7', 'x3']
+['is', '_be_v_id', '<5:7>', 'h1', 'e2']
+['a', '_a_q', '<8:9>', 'h10', 'x9']
+['son', '_son_n_of', '<10:13>', 'h13', 'x9']
+['King Dasharath.', 'proper_q', '<17:32>', 'h15', 'x14']
+['King Dasharath.', 'compound', '<17:32>', 'h18', 'e19']
+['King', 'udef_q', '<17:21>', 'h21', 'x20']
+['King', '_king_n_of', '<17:21>', 'h24', 'x20']
+['Dasharath.', 'named', '<22:32>', 'h18', 'x14']
+COMPOUNDS:compound_ids,compound_counts
+[7] [1]
+ 
+compound= King Dasharath.
+QUANTIFIERS:quantifier_id,quantifier_ARG0,quantifier_LBL,quantifier_RSTR
+[1, 4, 6, 8] ['x3', 'x9', 'x14', 'x20'] ['h4', 'h10', 'h15', 'h21'] ['h5', 'h11', 'h16', 'h22']
+Rama~proper_q<0:4>~h4~x3(['Rama', 'named', '<0:4>', 'h7', 'x3'])
+a~_a_q<8:9>~h10~x9(['son', '_son_n_of', '<10:13>', 'h13', 'x9'])
+King Dasharath.~proper_q<17:32>~h15~x14(['Dasharath.', 'named', '<22:32>', 'h18', 'x14'])
+King~udef_q<17:21>~h21~x20(['King', '_king_n_of', '<17:21>', 'h24', 'x20'])
+###################################################################################################
+RELS with ARGUMENTS
+is~_be_v_id<5:7>~h1~e2(['Rama', 'named', '<0:4>', 'h7', 'x3'],['son', '_son_n_of', '<10:13>', 'h13', 'x9'])
+son~_son_n_of<10:13>~h13~x9(['Dasharath.', 'named', '<22:32>', 'h18', 'x14'])
+King Dasharath.~compound<17:32>~h18~e19(['Dasharath.', 'named', '<22:32>', 'h18', 'x14'],['King', '_king_n_of', '<17:21>', 'h24', 'x20'])
+King~_king_n_of<17:21>~h24~x20('i25_?')
+
+Note:
+For TAM or GNP Information use tam_gnp dictionary e.g. tam_gnp['x3']
+###################################################################################################
+initial tam_gnp before update: {'x20': 'x20 [ x PERS: 3 NUM: sg IND: + PT: notpro ]', 'x14': 'x14 [ x PERS: 3 NUM: sg IND: + ]', 'x9': 'x9 [ x PERS: 3 NUM: sg IND: + ]'}
+tam_gnp_dump= {'x20': 'x20 [ x PERS: 3 NUM: sg IND: + PT: notpro ]', 'x14': 'x14 [ x PERS: 3 NUM: sg IND: + ]', 'x9': 'x9 [ x PERS: 3 NUM: sg IND: + ]', 'x3': '<0:4> LBL: h4 ARG0: x3 [ x PERS: 3 NUM: sg IND: + ]', 'e2': '<5:7> LBL: h1 ARG0: e2 [ e SF: prop TENSE: pres MOOD: indicative PROG: - PERF: - ]', 'e19': '<17:32> LBL: h18 ARG0: e19 [ e SF: prop TENSE: untensed MOOD: indicative PROG: - PERF: - ]'}
+string_to_be_inserted= [ e SF: prop TENSE: pres MOOD: indicative PROG: - PERF: - ]

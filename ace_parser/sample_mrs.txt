@@ -1,0 +1,17 @@
+SENT: Rama is a son of King Dasharath.
+[ LTOP: h0
+INDEX: e2 [ e SF: prop TENSE: pres MOOD: indicative PROG: - PERF: - ]
+RELS: < [ proper_q<0:4> LBL: h4 ARG0: x3 [ x PERS: 3 NUM: sg IND: + ] RSTR: h5 BODY: h6 ]
+ [ named<0:4> LBL: h7 CARG: "Rama" ARG0: x3 ]
+ [ _be_v_id<5:7> LBL: h1 ARG0: e2 ARG1: x3 ARG2: x9 [ x PERS: 3 NUM: sg IND: + ] ]
+ [ _a_q<8:9> LBL: h10 ARG0: x9 RSTR: h11 BODY: h12 ]
+ [ _son_n_of<10:13> LBL: h13 ARG0: x9 ARG1: x14 [ x PERS: 3 NUM: sg IND: + ] ]
+ [ proper_q<17:32> LBL: h15 ARG0: x14 RSTR: h16 BODY: h17 ]
+ [ compound<17:32> LBL: h18 ARG0: e19 [ e SF: prop TENSE: untensed MOOD: indicative PROG: - PERF: - ] ARG1: x14 ARG2: x20 [ x PERS: 3 NUM: sg IND: + PT: notpro ] ]
+ [ udef_q<17:21> LBL: h21 ARG0: x20 RSTR: h22 BODY: h23 ]
+ [ _king_n_of<17:21> LBL: h24 ARG0: x20 ARG1: i25 ]
+ [ named<22:32> LBL: h18 CARG: "Dasharath" ARG0: x14 ] >
+HCONS: < h0 qeq h1 h5 qeq h7 h11 qeq h13 h16 qeq h18 h22 qeq h24 >
+ICONS: < > ]
+
+

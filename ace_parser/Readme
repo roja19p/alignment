@@ -1,0 +1,22 @@
+#INSTALL
+########
+
+
+1. Untar ace-parser 0.31 binary version in $HOME/
+2. Untar erg-2018-x86-64-0.9.31.dat.bz2 in $HOME/ace-0.9.31/
+
+
+#RUN:
+####
+	cd $HOME_alignment/ace_parser/
+	sh run.sh <file>
+		Ex: sh run.sh sample
+	(Outputs: sample_mrs.txt and sample.txt
+		where sample_mrs.txt  is the original mrs from ace parser
+		      sample.txt is the mrs in readable format.
+	)
+
+
+#To get constituency tree :
+	Refer $HOME_alignment/ace_parser/Readme_to_run_tree.txt	
+
