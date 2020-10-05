@@ -26,6 +26,8 @@ do
 	sh $HOME_alignment/shell_scripts/mul_nmt.sh $line1 $MYPATH 
 	#$1 $line
 	cp $line1 ../mul_nmts/
+	grep "^ENG" $line1 > h_sentence
+	grep "NMT" $line1 >> h_sentence
 	cp p3_alignment_utf8.csv ../outputs/p3_align_"$line"_"$DATE".csv
 	cd ..
 done	

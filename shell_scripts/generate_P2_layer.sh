@@ -48,7 +48,7 @@ sed -i 's/dummy //g' new_layer_p2.dat
 #Converting P2 layer fact to csv 
 python3 $HOME_alignment/src/convert_new_layer_fact_to_csv.py new_layer_p2.dat P2 > p2_layer.csv
 
-python3 $HOME_alignment/src/get_left_over_wrds.py p2_layer.csv  P2 > p2_left_over_wrds.dat
+python3 $HOME_alignment/src/get_left_over_wrds.py p2_layer.csv  P2 manual_id_mapped.dat > p2_left_over_wrds.dat
 python3 $HOME_alignment/src/convert_new_layer_fact_to_csv.py p2_left_over_wrds.dat P2_left_over_ids > p2_left_over_wrds.csv
 
 #P layer info:

@@ -23,7 +23,10 @@ for line in open(sys.argv[2]):
             item = each.split()
             j = []
             for i in item:
-                j.append(i+'_'+hwrd_dic[i])
+                if '##' not in i:
+                    j.append(i+'_'+hwrd_dic[i])
+                else:
+                    j.append(i)
             new_lst.append('+'.join(j))
         else:
             new_lst.append(each)

@@ -16,14 +16,39 @@
 ?f<-(iter-h_g_id ?iter $?hids)
 (hindi_head_id-grp_ids ?hid $?gids)
 ?f1<-(iter-type-eng_g_id-h_g_id ?iter1 ?type  ?id  ?hid)
-(test (member$ ?hid $?hids))
-(test (neq ?hid $?gids))
+;(test (member$ ?hid $?hids))
+;(test (neq ?hid $?gids))
+=>
+        (retract ?f ?f1)
+        (bind ?new_id  (explode$ (implode$ (remove_character " "  (implode$ $?gids) ","))))
+        (bind $?hids (replace$ $?hids ?id ?id ?new_id))
+        (if (>= ?iter ?iter1) then
+                (assert (iter-h_g_id ?iter $?hids))
+        else
+                (assert (iter-h_g_id ?iter1 $?hids))
+        )
+)
+
+
+
+(defrule replace_head_with_childs_whn_sugg_avl
+(declare (salience 1))
+?f<-(iter-h_g_id ?iter $?hids)
+(hindi_head_id-grp_ids ?hid $?gids)
+?f1<-(iter-type-eng_g_id-h_g_id ?iter1 ?type  ?id ?hid)
+;(test (member$ ?hid $?hids))
+;(test (neq ?hid $?gids))
+(meaning_suggested ?id ?hid)
 =>
 	(retract ?f ?f1)
-	(bind ?new_id  (explode$ (implode$ (remove_character " "  (implode$ $?gids) ","))))
+	;(bind ?new_id  (explode$ (implode$ (remove_character " "  (implode$ $?gids) ","))))
+	(bind ?new_id  (string-to-field (implode$ (remove_character " "  (implode$ $?gids) ","))))
+	(printout t (type ?new_id) crlf)
+    	(bind ?new_id (string-to-field (str-cat "##," ?new_id ",##")))
+
 	(bind $?hids (replace$ $?hids ?id ?id ?new_id))
 	(if (>= ?iter ?iter1) then 
-		(assert (iter-h_g_id ?iter $?hids))
+		(assert (iter-h_g_id ?iter ?hids))
 	else
 		(assert (iter-h_g_id ?iter1 $?hids))
 	)
